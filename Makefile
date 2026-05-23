@@ -1,47 +1,33 @@
-# Nombre del ejecutable
-NAME = program
-
-# Compilador
-CC = gcc
-
-# Flags de compilación
-CFLAGS = -Wall -Wextra
-CPPFLAGS = -I$(MINILIBX_DIR)
-
-# MiniLibX
-MINILIBX_DIR = externals/minilibx-linux
-MINILIBX_LIB = $(MINILIBX_DIR)/libmlx_Linux.a
-MINILIBX_LDFLAGS = -L$(MINILIBX_DIR)
-MINILIBX_LIBS = -lmlx_Linux -lXext -lX11 -lm -lz
-
-# Código fuente del proyecto
-SRC = $(shell find src -type f -name "*.c")
+NAME = game
+CC = cc
+SRC = src/main.c src/player.c src/engine.c src/screen_manager.c
 OBJ = $(SRC:.c=.o)
 
-# Regla principal: compilar el programa
-all: $(NAME)
+CFLAGS = -Iexternal/ft-lib -Iexternal/mlx
+LDFLAGS = -L./external/mlx -lmlx -lXext -lX11 -lm -lz
+LIBS = external/ft-lib/libft.a external/mlx/libmlx.a
 
-$(NAME): $(MINILIBX_LIB) $(OBJ)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJ) -o $@ $(MINILIBX_LDFLAGS) $(MINILIBX_LIBS)
+.PHONY: all external clean fclean re
 
-$(MINILIBX_LIB):
-	$(MAKE) -C $(MINILIBX_DIR)
+all: external $(NAME)
 
-# Regla para compilar los archivos .c a .o
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+external: external/ft-lib/libft.a external/mlx/libmlx.a
 
-# Limpiar archivos objeto
+external/ft-lib/libft.a:
+	make -C external/ft-lib
+
+external/mlx/libmlx.a:
+	make -C external/mlx
+
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME) $(LIBS) $(LDFLAGS)
+
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ)
+	make -C external/ft-lib clean
+	make -C external/mlx clean
 
-# Limpiar todo (incluyendo el ejecutable)
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(MINILIBX_DIR) clean
+	rm -rf $(NAME)
 
-# Recompilar desde cero
 re: fclean all
-
-# Evitar que make interprete los nombres de las reglas como archivos
-.PHONY: all clean fclean re

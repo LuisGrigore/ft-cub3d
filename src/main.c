@@ -5,38 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/04 15:04:47 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/05/04 15:28:51 by lgrigore         ###   ########.fr       */
+/*   Created: 2026/05/23 16:22:28 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/05/23 17:26:03 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx_instance.h"
-#include "config/key_code_config.h"
+#include "../include/config.h"
+#include "../include/game.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-void end(void *param)
+// DEBUG
+char	**get_map(void)
 {
-	(void)param;
-	exit(0);
+	static const char	*map_data[] = {"111111111111111", "100000000000001",
+			"100000000000001", "100000100000001", "100000000000001",
+			"100000010000001", "100001000000001", "100000000000001",
+			"100000000000001", "111111111111111", NULL};
+	char				**map;
+	int					i;
+
+	map = malloc(sizeof(char *) * 11);
+	if (!map)
+		return (NULL);
+	i = 0;
+	while (map_data[i] != NULL)
+	{
+		map[i] = (char *)map_data[i];
+		i++;
+	}
+	map[i] = NULL;
+	return (map);
 }
 
-int loop(void *param)
+int	main(void)
 {
-	(void)param;
-	mlx_instance_clear_image_buffer(999999999);
-	mlx_instance_draw_image_buffer();
+	t_game	game;
+
+	init_game(&game, (t_game_config){.map = get_map(), .screen_width = WIDTH,
+		.screen_height = HEIGHT, .title = "Cube3D",
+		.player_starting_config = (t_player_config){.starting_angle = PI / 2,
+		.starting_x = WIDTH / 2, .starting_y = HEIGHT / 2}});
+	start_game(&game);
 	return (0);
-}
-
-int main(int argc, char const *argv[])
-{
-	mlx_instance_init(800, 600, "Test Window");
-	mlx_instance_add_key_binding(ESC, end, NULL);
-	mlx_instance_set_loop_hook(loop, NULL);
-	mlx_instance_start_loop();
-	mlx_instance_clear_image_buffer(0);
-	
-	mlx_instance_destroy();
-	return 0;
 }
