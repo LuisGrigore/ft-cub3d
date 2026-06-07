@@ -6,7 +6,7 @@
 #    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
-#    Updated: 2026/06/07 21:05:57 by lgrigore         ###   ########.fr        #
+#    Updated: 2026/06/07 21:08:02 by lgrigore         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= includes
 
-LIBFT_DIR	= libft
-MLX_DIR		= minilibx-linux
+LIBFT_DIR	= ./externals/libft
+MLX_DIR		= ./externals/minilibx-linux
 
 CC			= cc
 
