@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 15:33:46 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/05/23 16:58:07 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:54:20 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
+# define ESC 65307
 
 # define PI 3.14159265359
 

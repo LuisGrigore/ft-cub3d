@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 23:34:22 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/26 14:23:01 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:31:14 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	ft_check_player_pos(char **map, int height, int px, int py)
 	return (1);
 }
 
-static int	ft_val_char_player(char **map, int *px, int *py)
+static int	ft_val_char_player(char **map, float *px, float *py)
 {
 	int	pos[2];
 	int	player;
@@ -85,8 +85,9 @@ static int	ft_val_char_player(char **map, int *px, int *py)
 			if (ft_strchr("NSEW", map[pos[0]][pos[1]]))
 			{
 				player++;
-				*px = pos[1];
-				*py = pos[0];
+				*px = (float) pos[1];
+				*py = (float) pos[0];
+				map[pos[0]][pos[1]] = '0';
 			}
 			pos[1]++;
 		}
@@ -97,17 +98,13 @@ static int	ft_val_char_player(char **map, int *px, int *py)
 	return (1);
 }
 
-int	ft_val_map(char **map, int height, int width)
+int	ft_val_map(char **map, int height, t_parseo *parse)
 {
-	int	px;
-	int	py;
-
-	(void)width;
-	if (!ft_val_char_player(map, &px, &py))
+	if (!ft_val_char_player(map, &parse->player_x, &parse->player_y))
 		return (0);
 	if (!ft_check_sides(map, height))
 		return (0);
-	if (!ft_check_player_pos(map, height, px, py))
+	if (!ft_check_player_pos(map, height, parse->player_x, parse->player_y))
 		return (0);
 	return (1);
 }

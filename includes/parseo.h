@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/27 20:48:18 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:31:50 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				ft_inst_header(t_header **head, const char *line);
 int				ft_check_header(t_header *h);
 int				ft_read_map(t_parseo *parse, t_line **list);
 char			**ft_norm_map(t_line *lst, t_parseo *parse);
-int				ft_val_map(char **map, int height, int width);
+int				ft_val_map(char **map, int height, t_parseo *parse);
 t_final_parse	*ft_final_parse(t_parseo *parse);
 
 

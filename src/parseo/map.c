@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:18:16 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/25 16:46:11 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:37:24 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_read_map(t_parseo *parse, t_line **list)
 			continue;
 		}
 		ft_add_line(list, ft_new_line(lines[1]));
+		free(lines[1]);
 	}
 	return (1);
 }

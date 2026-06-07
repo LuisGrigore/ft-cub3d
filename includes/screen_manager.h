@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 16:44:57 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/05/27 19:55:06 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:14:35 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,18 @@ typedef struct s_screen
 
 	t_loop_hook		loop;
 
-}					t_screen;
+} t_screen;
 
-//la puse para las hacer las texturas la funcion se encuenta en final_parse
 typedef struct s_textures
 {
 	void	*img;
-	char	*dir;
+	char	*data;
 	int		width;
 	int		heigth;
 	int		bpp;
 	int		line_len;
 	int		endian;
-}	t_textures;
+} t_textures;
 
 typedef struct s_screen_config
 {
@@ -77,11 +76,4 @@ typedef struct s_screen_config
 	t_loop_hook		loop;
 }					t_screen_config;
 
-void				init_screen(t_screen *screen, t_screen_config config);
-void				start_screen(t_screen *screen);
-void				set_hook(t_screen *screen, t_screen_hook hook);
-void				put_pixel(int x, int y, int color, t_screen *screen);
-void				clear_image(t_screen *screen);
-// TODO
-void				destroy_screen(t_screen *screen);
 #endif
