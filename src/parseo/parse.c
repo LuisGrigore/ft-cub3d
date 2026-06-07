@@ -12,7 +12,7 @@
 
 #include "../../includes/parseo.h"
 
-t_final_parse	*ft_parse()
+t_final_parse	*ft_parse(void)
 {
 	t_parseo		*parse;
 	char			*line;

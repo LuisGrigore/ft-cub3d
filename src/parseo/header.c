@@ -14,7 +14,7 @@
 
 static int	set_texture(char **dst, const char *line, int start)
 {
-	int		end;
+	int	end;
 
 	if (*dst)
 		return (printf("Error: textura duplicada\n"), -1);
@@ -28,10 +28,10 @@ static int	set_texture(char **dst, const char *line, int start)
 	return (1);
 }
 
-int ft_inst_header(t_header **head, const char *line)
+int	ft_inst_header(t_header **head, const char *line)
 {
 	int	resp;
-	
+
 	resp = 0;
 	if (ft_strncmp(line, "NO", 2) == 0)
 		resp = set_texture(&(*head)->text_no, line, 2);

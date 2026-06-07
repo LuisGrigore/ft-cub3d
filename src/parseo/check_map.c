@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 23:34:22 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/02 19:31:14 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 22:46:44 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
-
 
 static int	ft_check_top_bottom(char **map, int y)
 {
@@ -81,12 +80,13 @@ static int	ft_val_char_player(char **map, float *px, float *py)
 		while (map[pos[0]][pos[1]])
 		{
 			if (!ft_is_valid(map[pos[0]][pos[1]]))
-				return (printf("Error: caracter invalido '%c'\n", map[pos[0]][pos[1]]), 0);
+				return (printf("Error: caracter invalido '%c'\n",
+						map[pos[0]][pos[1]]), 0);
 			if (ft_strchr("NSEW", map[pos[0]][pos[1]]))
 			{
 				player++;
-				*px = (float) pos[1];
-				*py = (float) pos[0];
+				*px = (float)pos[1];
+				*py = (float)pos[0];
 				map[pos[0]][pos[1]] = '0';
 			}
 			pos[1]++;

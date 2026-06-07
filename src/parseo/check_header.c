@@ -41,7 +41,7 @@ static int	ft_isnumeric(const char *s)
 	return (1);
 }
 
-static int ft_check_header_f_c(const char *line)
+static int	ft_check_header_f_c(const char *line)
 {
 	int		i;
 	int		num;
@@ -76,13 +76,10 @@ int	ft_check_header(t_header *h)
 		return (printf("Error: faltan texturas\n"), 0);
 	if (!h->color_f || !h->color_c)
 		return (printf("Error: faltan colores\n"), 0);
-	if (!ft_check_file(h->text_no)
-		|| !ft_check_file(h->text_so)
-		|| !ft_check_file(h->text_we)
-		|| !ft_check_file(h->text_ea))
+	if (!ft_check_file(h->text_no) || !ft_check_file(h->text_so)
+		|| !ft_check_file(h->text_we) || !ft_check_file(h->text_ea))
 		return (printf("Error: textura inválida\n"), 0);
-	if (!ft_check_header_f_c(h->color_f)
-		|| !ft_check_header_f_c(h->color_c))
+	if (!ft_check_header_f_c(h->color_f) || !ft_check_header_f_c(h->color_c))
 		return (printf("Error: color inválido\n"), 0);
 	return (1);
 }

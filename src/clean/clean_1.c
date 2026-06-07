@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
- 
+
 void	ft_clean_header(t_header *h)
 {
 	if (!h)
@@ -26,19 +26,18 @@ void	ft_clean_header(t_header *h)
 
 void	ft_clean_map(t_map **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while((*map)->map[i])
+	while ((*map)->map[i])
 		free((*map)->map[i++]);
 	free((*map)->map);
 }
 
-void ft_free_parseo(t_parseo **parse)
+void	ft_free_parseo(t_parseo **parse)
 {
 	if (!parse || !*parse)
-		return;
-
+		return ;
 	ft_clean_header((*parse)->header);
 	ft_clean_map(&(*parse)->map);
 	free((*parse)->header);
@@ -52,7 +51,7 @@ void	ft_free_split(char **split)
 	int	i;
 
 	i = 0;
-	while(split[i])
+	while (split[i])
 	{
 		free(split[i]);
 		i++;
@@ -62,9 +61,9 @@ void	ft_free_split(char **split)
 
 void	ft_del_list(t_line **list)
 {
-	t_line *tmp;
-	t_line *lst;
-	
+	t_line	*tmp;
+	t_line	*lst;
+
 	lst = *list;
 	while (lst)
 	{

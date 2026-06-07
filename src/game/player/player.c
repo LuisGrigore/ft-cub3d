@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:03:39 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/03 14:03:20 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 23:17:35 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/game.h"
-#include "../../../includes/player.h"
 #include "../../../includes/config.h"
+#include "../../../includes/engine.h"
+#include "../../../includes/player.h"
 
-static int	touch(float x, float y, t_game *g)
+static int	touch(float x, float y, t_engine *g)
 {
 	int	map_x;
 	int	map_y;
@@ -81,7 +81,7 @@ int	ft_player_key_release(int keycode, void *player_ptr)
 	return (0);
 }
 
-void	ft_move_player(t_player *p, t_game *g)
+void	ft_move_player(t_player *p, t_engine *g)
 {
 	float	speed;
 	float	nx;

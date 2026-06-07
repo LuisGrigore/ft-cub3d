@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   engine.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#ifndef ENGINE_H
+# define ENGINE_H
 
 # include "parseo.h"
 # include "player.h"
-# include "config.h"
+// # include "config.h"
 # include "screen.h"
 # include <math.h>
 
+typedef struct s_player			t_player;
+typedef struct s_final_parse	t_final_parse;
 
-typedef struct s_player t_player;
-typedef struct s_final_parse t_final_parse;
-
-typedef struct s_game
+typedef struct s_engine
 {
 	t_screen	screen;
 	t_player	player;
@@ -37,32 +36,36 @@ typedef struct s_game
 	int			colorF;
 	int			colorC;
 
-}	t_game;
+	int			block_size;
+
+}				t_engine;
 
 typedef struct s_ray
 {
-	float	dir_x;
-	float	dir_y;
-	int		map_x;
-	int		map_y;
-	float	side_dist_x;
-	float	side_dist_y;
-	float	delta_dist_x;
-	float	delta_dist_y;
-	float	dist;
-	int		step_x;
-	int		step_y;
-	int		side;
-	int		hit;
-	float	wall_x;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	int		tex_x;
+	float		dir_x;
+	float		dir_y;
+	int			map_x;
+	int			map_y;
+	float		side_dist_x;
+	float		side_dist_y;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	float		dist;
+	int			step_x;
+	int			step_y;
+	int			side;
+	int			hit;
+	float		wall_x;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			tex_x;
 	t_texture	*tex;
-}	t_ray;
+}				t_ray;
 
-void	ft_init_game(t_game *g, t_final_parse *p);
-void	ft_start_game(t_game *g);
+
+
+void	ft_init_engine(t_engine *g, t_final_parse *p);
+void	ft_start_engine(t_engine *g);
 
 #endif

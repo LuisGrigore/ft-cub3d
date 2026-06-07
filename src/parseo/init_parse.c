@@ -12,7 +12,7 @@
 
 #include "../../includes/parseo.h"
 
-static void ft_init_header(t_header **header)
+static void	ft_init_header(t_header **header)
 {
 	(*header)->text_no = NULL;
 	(*header)->text_so = NULL;
@@ -22,7 +22,7 @@ static void ft_init_header(t_header **header)
 	(*header)->color_c = NULL;
 }
 
-static void ft_init_map(t_map **map)
+static void	ft_init_map(t_map **map)
 {
 	(*map)->map = NULL;
 	(*map)->height = 0;
@@ -46,4 +46,3 @@ int	ft_init_parse(t_parseo *parse)
 	parse->player_dir = 'x';
 	return (1);
 }
-

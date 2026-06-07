@@ -25,7 +25,7 @@ int	ft_read_map(t_parseo *parse, t_line **list)
 		if (lines[1][0] == '\0')
 		{
 			free(lines[1]);
-			continue;
+			continue ;
 		}
 		ft_add_line(list, ft_new_line(lines[1]));
 		free(lines[1]);
@@ -33,12 +33,12 @@ int	ft_read_map(t_parseo *parse, t_line **list)
 	return (1);
 }
 
-static int ft_get_weigth(t_line *lst)
+static int	ft_get_weigth(t_line *lst)
 {
 	t_line	*tmp;
 	int		w;
 	int		len;
-	
+
 	tmp = lst;
 	w = 0;
 	while (tmp)
@@ -60,7 +60,7 @@ static char	*ft_reg_line(char *line, int w)
 	str = malloc(w + 1);
 	if (!str)
 		return (NULL);
-	while(line[i])
+	while (line[i])
 	{
 		str[i] = line[i];
 		i++;

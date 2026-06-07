@@ -14,7 +14,7 @@
 
 void	ft_skip_spc(const char *line, int *i)
 {
-	while(line[*i] && (line[*i] == ' ' || line[*i] == '\t'))
+	while (line[*i] && (line[*i] == ' ' || line[*i] == '\t'))
 		*i += 1;
 }
 
@@ -29,13 +29,13 @@ int	ft_len_dir(const char *line, int start)
 	return (len);
 }
 
-t_line *ft_new_line(char *line)
+t_line	*ft_new_line(char *line)
 {
-	t_line *lst;
-	
+	t_line	*lst;
+
 	if (!line)
 		return (NULL);
-	lst = (t_line *) ft_calloc(1, sizeof(t_line));
+	lst = (t_line *)ft_calloc(1, sizeof(t_line));
 	if (!lst)
 		return (NULL);
 	lst->text = ft_strdup(line);
@@ -46,9 +46,9 @@ t_line *ft_new_line(char *line)
 void	ft_add_line(t_line **lst, t_line *new)
 {
 	t_line	*tmp;
-	
+
 	if (!*lst || !new)
-		return ;	
+		return ;
 	tmp = *lst;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
@@ -71,4 +71,3 @@ int	ft_len_lines(t_line *list)
 	}
 	return (i);
 }
-

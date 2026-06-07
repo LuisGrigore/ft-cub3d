@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 15:43:34 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/02 20:04:14 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 23:24:56 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PLAYER_H
 # include <stdbool.h>
 
-typedef struct s_game t_game;
+typedef struct s_engine	t_engine;
 
 typedef struct s_player
 {
@@ -29,7 +29,7 @@ typedef struct s_player
 
 	bool	left_rotate;
 	bool	right_rotate;
-}			t_player;
+}						t_player;
 
 typedef struct player_config
 {
@@ -37,10 +37,11 @@ typedef struct player_config
 	float	starting_y;
 	float	starting_angle;
 
-}			t_player_config;
+}						t_player_config;
 
-void	ft_init_player(t_player *player, t_player_config config);
+void	ft_init_player(t_player *player,
+							t_player_config config);
 int		ft_player_key_press(int keycode, void *player_ptr);
 int		ft_player_key_release(int keycode, void *player_ptr);
-void	ft_move_player(t_player *p, t_game *g);
+void	ft_move_player(t_player *p, t_engine *g);
 #endif

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   final_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:27:01 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/02 19:20:54 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 22:45:39 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parseo.h"
 #include "../../includes/config.h"
+#include "../../includes/parseo.h"
 #include "../../includes/player.h"
 
-int	ft_rgb_to_int(char *color)
+static int	ft_rgb_to_int(char *color)
 {
 	char	**rgb;
 	int		r;
@@ -22,7 +22,7 @@ int	ft_rgb_to_int(char *color)
 	int		b;
 
 	rgb = ft_split(color, ',');
-	if(!rgb)
+	if (!rgb)
 		return (-1);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
@@ -31,6 +31,26 @@ int	ft_rgb_to_int(char *color)
 	return ((r << 16) | (g << 8) | b);
 }
 
+static t_map	*ft_create_grid(t_map *map)
+{
+	t_map	*grid;
+	int		i;
+
+	grid = (t_map *)malloc(sizeof(t_map));
+	if (!grid)
+		return (NULL);
+	grid->map = (char **)malloc(sizeof(char *) * (map->height + 1));
+	i = 0;
+	while (map->map[i])
+	{
+		grid->map[i] = ft_strdup(map->map[i]);
+		i++;
+	}
+	grid->map[i] = NULL;
+	grid->height = map->height;
+	grid->len_max = map->len_max;
+	return (grid);
+}
 
 t_final_parse	*ft_final_parse(t_parseo *parse)
 {
@@ -39,7 +59,7 @@ t_final_parse	*ft_final_parse(t_parseo *parse)
 	final = ft_calloc(1, sizeof(t_final_parse));
 	if (!final)
 		return (NULL);
-	//Me falta lo del angulo
+	// Me falta lo del angulo
 	final->grid = ft_create_grid(parse->map);
 	final->colorC = ft_rgb_to_int(parse->header->color_c);
 	final->colorF = ft_rgb_to_int(parse->header->color_f);
@@ -55,8 +75,7 @@ t_final_parse	*ft_final_parse(t_parseo *parse)
 		final->f_player.starting_angle = PI / 2;
 	else if (parse->player_dir == 'W')
 		final->f_player.starting_angle = PI;
-	else  // 'E'
+	else // 'E'
 		final->f_player.starting_angle = 0;
 	return (final);
 }
-
