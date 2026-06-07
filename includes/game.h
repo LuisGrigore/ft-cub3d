@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 16:44:50 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/07 21:01:25 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:31:33 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef struct s_game
 	t_player	player;
 	char		**map;
 
-	t_textures	no;
-	t_textures	so;
-	t_textures	we;
-	t_textures	ea;
+	t_texture	no;
+	t_texture	so;
+	t_texture	we;
+	t_texture	ea;
 
 	int			colorF;
 	int			colorC;
@@ -59,7 +59,7 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 	int		tex_x;
-	t_textures	*tex;
+	t_texture	*tex;
 }	t_ray;
 
 void	ft_init_game(t_game *g, t_final_parse *p);

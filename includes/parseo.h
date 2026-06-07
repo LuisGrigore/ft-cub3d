@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseo.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/02 19:31:50 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:16:22 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <fcntl.h>
 #include "../libft/libft.h"
 #include "./player.h"
-#include "../minilibx-linux/mlx.h"
 
 
 typedef struct s_line

@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/03 14:02:54 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 22:38:57 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/game.h"
 #include "../../../includes/player.h"
-
-static int	ft_get_pixel(t_textures *tex, int x, int y)
-{
-	int i; 
-	i = y * tex->line_len + x * (tex->bpp / 8);
-	return (*(int *)(tex->data + i));
-}
-
-static void	ft_put_pixel(t_game *g, int x, int y, int color)
-{
-	int i;
-	i = y * g->screen.size_line + x * (g->screen.bpp / 8);
-	g->screen.data[i] = color & 0xFF;
-	g->screen.data[i + 1] = (color >> 8) & 0xFF;
-	g->screen.data[i + 2] = (color >> 16) & 0xFF;
-}
+#include "../../../includes/config.h"
 
 static void	ft_init_ray(t_ray *r, t_game *g, float angle)
 {
@@ -117,16 +102,16 @@ static void	ft_draw_wall(t_game *g, t_ray *r, int x)
 
 	y = 0;
 	while (y < r->draw_start)
-		ft_put_pixel(g, x, y++, g->colorC);
+		ft_screen_put_pixel(&g->screen, x, y++, g->colorC);
 	while (y < r->draw_end)
 	{
-		int tex_y = (y - r->draw_start) * r->tex->heigth / r->line_height;
-		int color = ft_get_pixel(r->tex, r->tex_x, tex_y);
-		ft_put_pixel(g, x, y, color);
+		int tex_y = (y - r->draw_start) * r->tex->height / r->line_height;
+		int color = ft_screen_texture_get_pixel(r->tex, r->tex_x, tex_y);
+		ft_screen_put_pixel(&g->screen, x, y, color);
 		y++;
 	}
 	while (y < g->screen.height)
-		ft_put_pixel(g, x, y++, g->colorF);
+		ft_screen_put_pixel(&g->screen, x, y++, g->colorF);
 }
 
 static void	ft_draw_line(t_game *g, float angle, int x)
@@ -140,42 +125,68 @@ static void	ft_draw_line(t_game *g, float angle, int x)
 	ft_draw_wall(g, &r, x);
 }
 
-static int	ft_render(void *param)
+static int	ft_update(void *game_ptr)
 {
-	t_game	*g;
+	t_game	*game;
 	float	fov;
 	float	angle;
 	float	step;
 	int		i;
 
-	g = param;
-	ft_move_player(&g->player, g);
+	game = game_ptr;
+	ft_move_player(&game->player, game);
 	fov = PI / 3;
-	angle = g->player.angle - fov / 2;
+	angle = game->player.angle - fov / 2;
 	step = fov / WIDTH;
 	i = 0;
 	while (i < WIDTH)
 	{
-		ft_draw_line(g, angle, i);
+		ft_draw_line(game, angle, i);
 		angle += step;
 		i++;
 	}
-	mlx_put_image_to_window(g->screen.mlx, g->screen.win, g->screen.img, 0, 0);
 	return (0);
 }
 
-int ft_close(t_game *g)
+int ft_close(int keycode, void *param)
 {
-	mlx_destroy_window(g->screen.mlx, g->screen.win);
+	(void)keycode;
+	t_game *g = (t_game *)param;
+	ft_screen_destroy(&g->screen);
 	exit(0);
 	return (0);
 }
 
 void	ft_start_game(t_game *g)
 {
-	mlx_hook(g->screen.win, 17, 0, (int (*)())ft_close, g);
-	mlx_hook(g->screen.win, 2, 1L << 0, (int (*)())ft_player_key_press, &g->player);
-    mlx_hook(g->screen.win, 3, 1L << 1, (int (*)())ft_player_key_release, &g->player);
-    mlx_loop_hook(g->screen.mlx, (int (*)())ft_render, g);
-    mlx_loop(g->screen.mlx);
+	ft_screen_start(&g->screen);
+}
+
+static void	ft_load_texture(t_game *g, t_texture *tex, char *path)
+{
+	if (ft_screen_texture_load(&g->screen, tex, path) != 0)
+	{
+		/* TODO: manejar error apropiadamente */
+	}
+}
+
+void	ft_init_game(t_game *g, t_final_parse *p)
+{
+	ft_init_screen(&g->screen, &(t_screen_config){
+		.width = WIDTH,
+		.height = HEIGHT,
+		.title = "Cub3D",
+		.loop = (t_loop_hook){.func = ft_update, .param = g}
+	});
+	ft_screen_hook(&g->screen, (t_screen_hook){17, 0, ft_close, g});
+	ft_screen_hook(&g->screen, (t_screen_hook){2, 1L << 0, ft_player_key_press, &g->player});
+	ft_screen_hook(&g->screen, (t_screen_hook){3, 1L << 1, ft_player_key_release, &g->player});
+	ft_init_player(&g->player, p->f_player);
+	g->colorC = p->colorC;
+	g->colorF = p->colorF;
+	g->map = p->grid->map;
+	ft_load_texture(g, &g->no, p->text_no);
+	ft_load_texture(g, &g->so, p->text_so);
+	ft_load_texture(g, &g->we, p->text_we);
+	ft_load_texture(g, &g->ea, p->text_ea);
 }

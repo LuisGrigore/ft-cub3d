@@ -6,7 +6,7 @@
 #    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
-#    Updated: 2026/06/07 21:08:02 by lgrigore         ###   ########.fr        #
+#    Updated: 2026/06/07 22:36:33 by lgrigore         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 PARSE_SRCS = init_parse.c parse.c header.c check_header.c map.c check_map.c final_parse.c
 CLEAN_SRCS = clean_1.c
 UTILS_FILE_SRC = get_next_line.c utils.c utils_map.c
-ENGINE_SRCS = init_game.c render.c
+ENGINE_SRCS = engine.c
 PLAYER_SRCS = player.c
 SCREEN_SRCS = screen.c
 
@@ -40,7 +40,7 @@ SRCS		= $(addprefix $(SRC_DIR)/, main.c) \
 			  $(addprefix $(SRC_DIR)/utils/parse_file/, $(UTILS_FILE_SRC)) \
 			  $(addprefix $(SRC_DIR)/game/engine/, $(ENGINE_SRCS)) \
 			  $(addprefix $(SRC_DIR)/game/player/, $(PLAYER_SRCS)) \
-			  $(addprefix $(SRC_DIR)/screen/, $(SCREEN_SRCS))
+			  $(addprefix $(SRC_DIR)/screen/, $(SCREEN_SRCS)) \
 
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
