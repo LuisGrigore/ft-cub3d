@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 16:44:50 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/02 18:34:36 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:01:25 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "parseo.h"
 # include "player.h"
 # include "config.h"
-# include "screen_manager.h"
+# include "screen.h"
 # include <math.h>
 
 
@@ -64,6 +64,5 @@ typedef struct s_ray
 
 void	ft_init_game(t_game *g, t_final_parse *p);
 void	ft_start_game(t_game *g);
-//void	ft_render(void *param);
 
 #endif

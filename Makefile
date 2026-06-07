@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
-#    Updated: 2026/06/03 14:03:32 by juan-her         ###   ########.fr        #
+#    Updated: 2026/06/07 21:05:57 by lgrigore         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,15 @@ CLEAN_SRCS = clean_1.c
 UTILS_FILE_SRC = get_next_line.c utils.c utils_map.c
 ENGINE_SRCS = init_game.c render.c
 PLAYER_SRCS = player.c
+SCREEN_SRCS = screen.c
 
 SRCS		= $(addprefix $(SRC_DIR)/, main.c) \
 			  $(addprefix $(SRC_DIR)/parseo/, $(PARSE_SRCS)) \
 			  $(addprefix $(SRC_DIR)/clean/, $(CLEAN_SRCS)) \
 			  $(addprefix $(SRC_DIR)/utils/parse_file/, $(UTILS_FILE_SRC)) \
 			  $(addprefix $(SRC_DIR)/game/engine/, $(ENGINE_SRCS)) \
-			  $(addprefix $(SRC_DIR)/game/player/, $(PLAYER_SRCS))
+			  $(addprefix $(SRC_DIR)/game/player/, $(PLAYER_SRCS)) \
+			  $(addprefix $(SRC_DIR)/screen/, $(SCREEN_SRCS))
 
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

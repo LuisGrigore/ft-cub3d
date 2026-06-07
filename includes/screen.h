@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   screen_manager.h                                   :+:      :+:    :+:   */
+/*   screen.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCREEN_MANAGER_H
-# define SCREEN_MANAGER_H
+#ifndef SCREEN_H
+# define SCREEN_H
 
 # include "../minilibx-linux/mlx.h"
 
@@ -75,5 +75,7 @@ typedef struct s_screen_config
 	char			*title;
 	t_loop_hook		loop;
 }					t_screen_config;
+
+void	ft_init_screen(t_screen *screen);
 
 #endif
