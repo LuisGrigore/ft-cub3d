@@ -65,7 +65,7 @@ typedef struct s_ray
 
 typedef struct		s_engine_config
 {
-	t_final_parse *parsed;
+//	t_final_parse *parsed;
 	int		screen_width;
 	int		screen_height;
 	char	*title;

@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/09 16:04:42 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/09 16:06:30 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
 void	ft_init_engine(t_engine *g, t_final_parse *p)
 {
 	ft_init_screen(&g->screen, &(t_screen_config){.width = WIDTH,
-		.height = HEIGHT, .title = "Cub3D",
+		.height = HEIGHT, .title = TITLE, 
 		.loop = (t_loop_hook){.func = ft_update, .param = g}});
 	ft_screen_hook(&g->screen, (t_screen_hook){17, 0, ft_close, g});
 	ft_screen_hook(&g->screen, (t_screen_hook){2, 1L << 0, ft_player_key_press,
