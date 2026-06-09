@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/09 16:12:14 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/09 16:21:06 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_final_parse
 //**************PARSE*****************************
 int					ft_init_parse(t_parseo *parse);
 char				*get_next_line(int fd);
-t_final_parse		*ft_parse(void);
+t_final_parse	*ft_parse(const char *scene_path);
 char				*ft_header(t_parseo *parse);
 int					ft_inst_header(t_header **head, const char *line);
 int					ft_check_header(t_header *h);

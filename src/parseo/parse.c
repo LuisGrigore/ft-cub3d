@@ -6,13 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 17:26:21 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/09 16:15:03 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/09 16:19:35 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
 
-t_final_parse	*ft_parse(void)
+t_final_parse	*ft_parse(const char *scene_path)
 {
 	t_parseo		*parse;
 	char			*line;
@@ -26,7 +26,7 @@ t_final_parse	*ft_parse(void)
 		return (NULL);
 	if (!ft_init_parse(parse))
 		return (free(parse), NULL);
-	parse->fd = open("media/maps/firstMap.cub", O_RDONLY);
+	parse->fd = open(scene_path, O_RDONLY);
 	if (parse->fd < 0)
 		return (free(parse), NULL);
 	line = ft_header(parse);

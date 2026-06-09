@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/09 16:17:10 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/09 16:21:36 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 #include "../includes/player.h"
 #include "../includes/screen.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_engine		engine;
 	t_final_parse	*final;
 
-	final = ft_parse();
+	if (argc != 2)
+		return (printf("Usage: %s <scene_path>\n", argv[0]), 1);
+	final = ft_parse(argv[1]);
 	if (!final)
 		return (printf("Error parse\n"), 1);
 	ft_init_engine(&engine, final);
