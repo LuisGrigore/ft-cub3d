@@ -6,11 +6,10 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/07 23:17:35 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/09 16:05:14 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/config.h"
 #include "../includes/engine.h"
 #include "../includes/parseo.h"
 #include "../includes/player.h"

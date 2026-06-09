@@ -15,9 +15,9 @@
 
 # include "parseo.h"
 # include "player.h"
-// # include "config.h"
 # include "screen.h"
 # include <math.h>
+
 
 typedef struct s_player			t_player;
 typedef struct s_final_parse	t_final_parse;
@@ -63,9 +63,15 @@ typedef struct s_ray
 	t_texture	*tex;
 }				t_ray;
 
-
+typedef struct		s_engine_config
+{
+	t_final_parse *parsed;
+	int		screen_width;
+	int		screen_height;
+	char	*title;
+}				t_engine_config;
 
 void	ft_init_engine(t_engine *g, t_final_parse *p);
-void	ft_start_engine(t_engine *g);
+void	ft_start_engine(t_engine *engine);
 
 #endif
