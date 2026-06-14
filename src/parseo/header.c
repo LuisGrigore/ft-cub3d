@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 23:15:22 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/24 17:17:42 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/13 16:14:44 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,43 @@ int	ft_inst_header(t_header **head, const char *line)
 	return (resp);
 }
 
+static char	*ft_getlines(t_parseo *p)
+{
+	char	*line;
+	char	*temp;
+
+	line = get_next_line(p->fd);
+	if (!line)
+		return (NULL);
+	temp = ft_strtrim(line, "\n");
+	free(line);
+	return (temp);
+}
+
 char	*ft_header(t_parseo *parse)
 {
-	char	*lines[2];
+	char	*line;
 	int		ret;
 
-	while ((lines[0] = get_next_line(parse->fd)))
+	while (1)
 	{
-		lines[1] = ft_strtrim(lines[0], "\n");
-		free(lines[0]);
-		if (!lines[1])
+		line = ft_getlines(parse);
+		if (!line)
 			return (NULL);
-		if (lines[1][0] == '\0')
+		if (line[0] == '\0')
 		{
-			free(lines[1]);
+			free(line);
 			continue ;
 		}
-		ret = ft_inst_header(&parse->header, lines[1]);
+		ret = ft_inst_header(&parse->header, line);
 		if (ret == -1)
-			return (free(lines[1]), NULL);
+			return (free(line), NULL);
 		if (ret == 1)
 		{
-			free(lines[1]);
+			free(line);
 			continue ;
 		}
-		return (lines[1]);
+		return (line);
 	}
 	return (NULL);
 }

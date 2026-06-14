@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 23:34:22 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/07 22:46:44 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/12 22:39:33 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ static int	ft_val_char_player(char **map, float *px, float *py)
 			if (ft_strchr("NSEW", map[pos[0]][pos[1]]))
 			{
 				player++;
-				*px = (float)pos[1];
-				*py = (float)pos[0];
-				map[pos[0]][pos[1]] = '0';
+				ft_assign(&px, &py, pos, map);
 			}
 			pos[1]++;
 		}

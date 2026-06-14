@@ -6,13 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:27:01 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/07 22:45:39 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:13:16 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/config.h"
 #include "../../includes/parseo.h"
-#include "../../includes/player.h"
+// #include "../../includes/player.h"
 
 static int	ft_rgb_to_int(char *color)
 {
@@ -59,7 +59,6 @@ t_final_parse	*ft_final_parse(t_parseo *parse)
 	final = ft_calloc(1, sizeof(t_final_parse));
 	if (!final)
 		return (NULL);
-	// Me falta lo del angulo
 	final->grid = ft_create_grid(parse->map);
 	final->colorC = ft_rgb_to_int(parse->header->color_c);
 	final->colorF = ft_rgb_to_int(parse->header->color_f);
@@ -75,7 +74,7 @@ t_final_parse	*ft_final_parse(t_parseo *parse)
 		final->f_player.starting_angle = PI / 2;
 	else if (parse->player_dir == 'W')
 		final->f_player.starting_angle = PI;
-	else // 'E'
+	else
 		final->f_player.starting_angle = 0;
 	return (final);
 }

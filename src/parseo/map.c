@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:18:16 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/01 16:37:24 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/13 16:05:03 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 int	ft_read_map(t_parseo *parse, t_line **list)
 {
-	char	*lines[2];
+	char	*line;
+	char	*temp;
 
-	while ((lines[0] = get_next_line(parse->fd)))
+	line = get_next_line(parse->fd);
+	while (line)
 	{
-		lines[1] = ft_strtrim(lines[0], "\n");
-		free(lines[0]);
-		if (!lines[1])
+		temp = ft_strtrim(line, "\n");
+		free(line);
+		if (!temp)
 			return (0);
-		if (lines[1][0] == '\0')
+		if (temp[0] == '\0')
 		{
-			free(lines[1]);
+			free(temp);
+			line = get_next_line(parse->fd);
 			continue ;
 		}
-		ft_add_line(list, ft_new_line(lines[1]));
-		free(lines[1]);
+		ft_add_line(list, ft_new_line(temp));
+		free(temp);
+		line = get_next_line(parse->fd);
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:14:40 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/07 22:45:10 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/12 22:39:56 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ int	ft_check_inside(char **map, int y, int x)
 		x--;
 	}
 	return (1);
+}
+
+void	ft_assign(float **px, float **py, int pos[2], char **map)
+{
+	**px = (float)pos[1];
+	**py = (float)pos[0];
+	map[pos[0]][pos[1]] = '0';
 }

@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 15:33:46 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/09 16:06:39 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:54:20 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONFIG_H
 # define CONFIG_H
-
-# define TITLE "Cub3D"
 
 # define WIDTH 1280
 # define HEIGHT 720

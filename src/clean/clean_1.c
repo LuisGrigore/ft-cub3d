@@ -6,7 +6,7 @@
 /*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:23 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/27 20:48:41 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/13 16:31:12 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_clean_map(t_map **map)
 {
 	int	i;
 
+	if (!map || !*map || !(*map)->map)
+		return ;
 	i = 0;
 	while ((*map)->map[i])
 		free((*map)->map[i++]);
@@ -73,31 +75,4 @@ void	ft_del_list(t_line **list)
 		lst = tmp;
 	}
 	*list = NULL;
-}
-
-void	ft_free_final_parse(t_final_parse **final)
-{
-	int	i;
-
-	if (!final || !*final)
-		return ;
-	if ((*final)->grid)
-	{
-		if ((*final)->grid->map)
-		{
-			i = 0;
-			while ((*final)->grid->map[i])
-				free((*final)->grid->map[i++]);
-			free((*final)->grid->map);
-		}
-		free((*final)->grid);
-	}
-	free((*final)->text_no);
-	free((*final)->text_so);
-	free((*final)->text_we);
-	free((*final)->text_ea);
-	free((*final)->color_f);
-	free((*final)->color_c);
-	free(*final);
-	*final = NULL;
 }
