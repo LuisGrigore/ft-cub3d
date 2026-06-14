@@ -6,7 +6,7 @@
 #    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
-#    Updated: 2026/06/14 18:42:32 by lgrigore         ###   ########.fr        #
+#    Updated: 2026/06/14 18:44:28 by lgrigore         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,13 @@ CFLAGS		= -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
 MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # SRC FILES
-PARSE_SRCS = init_parse.c parse.c header.c check_header.c map.c check_map.c final_parse.c clean_1.c
-UTILS_FILE_SRC = get_next_line.c utils.c utils_map.c
+PARSE_SRCS = init_parse.c parse.c header.c check_header.c map.c check_map.c final_parse.c clean_1.c get_next_line.c utils.c utils_map.c
 ENGINE_SRCS = calc_wall.c ray.c engine.c
 PLAYER_SRCS =  player.c
 SCREEN_SRCS = textures.c screen.c
 
 SRCS		= $(addprefix $(SRC_DIR)/, main.c) \
 			  $(addprefix $(SRC_DIR)/parseo/, $(PARSE_SRCS)) \
-			  $(addprefix $(SRC_DIR)/clean/, $(CLEAN_SRCS)) \
-			  $(addprefix $(SRC_DIR)/utils/parse_file/, $(UTILS_FILE_SRC)) \
 			  $(addprefix $(SRC_DIR)/game/engine/, $(ENGINE_SRCS)) \
 			  $(addprefix $(SRC_DIR)/game/player/, $(PLAYER_SRCS)) \
 			  $(addprefix $(SRC_DIR)/screen/, $(SCREEN_SRCS)) \

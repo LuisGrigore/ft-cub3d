@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:14:40 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/12 22:39:56 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:45:04 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parseo.h"
+#include "../../includes/parseo.h"
 
 int	ft_is_valid(char c)
 {

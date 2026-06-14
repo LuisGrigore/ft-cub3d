@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 21:26:42 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/24 21:25:55 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:44:58 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parseo.h"
+#include "../../includes/parseo.h"
 
 void	ft_skip_spc(const char *line, int *i)
 {

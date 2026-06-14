@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:34 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/22 20:00:35 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:44:46 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parseo.h"
+#include "../../includes/parseo.h"
 
 static char	*ft_create(char **stack, char **buffer)
 {
