@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 22:15:38 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:23:45 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:32:05 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 static t_texture	*ft_side_x(t_ray *r, t_engine *g)
 {
 	if (r->dir_x > 0)
-		return (&g->ea);
+		return (g->ea);
 	else
-		return (&g->we);
+		return (g->we);
 }
 
 static t_texture	*ft_side_y(t_ray *r, t_engine *g)
 {
 	if (r->dir_y > 0)
-		return (&g->so);
+		return (g->so);
 	else
-		return (&g->no);
+		return (g->no);
 }
 
 void	ft_calc_wall(t_ray *r, t_engine *g)

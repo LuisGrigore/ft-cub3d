@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 21:18:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/14 18:22:51 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:29:27 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ int			ft_screen_stop(t_screen *screen);
 void			ft_screen_put_pixel(t_screen *screen, int x, int y, int color);
 
 /* Texture Management */
-int				ft_screen_texture_load(t_screen *screen, t_texture *tex,
-					const char *path);
+t_texture		*ft_screen_texture_load(t_screen *screen, const char *path);
 void			ft_screen_texture_destroy(t_screen *screen, t_texture *tex);
 
 int				ft_screen_texture_get_pixel(t_texture *tex, int x, int y);

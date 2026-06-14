@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:25:46 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:32:16 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,11 @@ int	ft_start_engine(t_engine *g)
 	return ft_screen_start(g->screen);
 }
 
-static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
-{
-	if (ft_screen_texture_load(g->screen, tex, path) != 0)
-		ft_destory_engine(g);
-}
+// static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
+// {
+// 	if (ft_screen_texture_load(g->screen, path) != 0)
+// 		ft_destory_engine(g);
+// }
 static int ft_exit_next_frame(void *engine_ptr)
 {
 	t_engine	*engine;
@@ -198,10 +198,11 @@ t_engine	*ft_create_engine(t_engine_config config)
 	engine->colorC = config.colorC;
 	engine->colorF = config.colorF;
 	engine->map = ft_copy_matrix(config.map);
-	ft_load_texture(engine, &engine->no, config.text_no_path);
-	ft_load_texture(engine, &engine->so, config.text_so_path);
-	ft_load_texture(engine, &engine->we, config.text_we_path);
-	ft_load_texture(engine, &engine->ea, config.text_ea_path);
+	engine->no = ft_screen_texture_load(engine->screen, config.text_no_path);
+	engine->so = ft_screen_texture_load(engine->screen, config.text_so_path);
+	engine->we = ft_screen_texture_load(engine->screen, config.text_we_path);
+	engine->ea = ft_screen_texture_load(engine->screen, config.text_ea_path);
+
 	engine->destroy_next_frame = false;
 	ft_screen_x_hook(engine->screen, (t_hook){.func = ft_exit_next_frame, .param = engine});
 	ft_screen_hook(engine->screen, (t_key_hook){2, 1L << 0, ft_key_press,
@@ -214,10 +215,10 @@ void	ft_destory_engine(t_engine *engine)
 {
 	if (!engine)
 		return ;
-	ft_screen_texture_destroy(engine->screen, &engine->no);
-	ft_screen_texture_destroy(engine->screen, &engine->so);
-	ft_screen_texture_destroy(engine->screen, &engine->we);
-	ft_screen_texture_destroy(engine->screen, &engine->ea);
+	ft_screen_texture_destroy(engine->screen, engine->no);
+	ft_screen_texture_destroy(engine->screen, engine->so);
+	ft_screen_texture_destroy(engine->screen, engine->we);
+	ft_screen_texture_destroy(engine->screen, engine->ea);
 	int	i;
 	if (engine->map)
 	{

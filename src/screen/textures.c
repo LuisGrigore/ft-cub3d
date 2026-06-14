@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:52:34 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 17:25:13 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:29:35 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 #include "../../includes/screen.h"
 #include <stdlib.h>
 
-int	ft_screen_texture_load(t_screen *screen, t_texture *tex, const char *path)
+t_texture *ft_screen_texture_load(t_screen *screen, const char *path)
 {
 	extern void	*mlx_xpm_file_to_image(void *, char *, int *, int *);
 	extern char	*mlx_get_data_addr(void *, int *, int *, int *);
-
+	t_texture	*tex;
+	
+	tex = (t_texture *)malloc(sizeof(t_texture));
+	if (!tex)
+		return (NULL);
 	tex->img = mlx_xpm_file_to_image(screen->mlx, (char *)path, &tex->width,
 			&tex->height);
 	if (!tex->img)
-		return (-1);
+		return (NULL);
 	tex->data = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len,
 			&tex->endian);
-	return (0);
+	return (tex);
 }
 
 int	ft_screen_texture_get_pixel(t_texture *tex, int x, int y)
@@ -56,4 +60,5 @@ void	ft_screen_texture_destroy(t_screen *screen, t_texture *tex)
 		mlx_destroy_image(screen->mlx, tex->img);
 	tex->img = NULL;
 	tex->data = NULL;
+	free(tex);
 }

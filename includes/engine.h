@@ -24,10 +24,10 @@ typedef struct s_engine
 	t_screen		*screen;
 	t_player		player;
 	char			**map;
-	t_texture		no;
-	t_texture		so;
-	t_texture		we;
-	t_texture		ea;
+	t_texture		*no;
+	t_texture		*so;
+	t_texture		*we;
+	t_texture		*ea;
 	int				colorF;
 	int				colorC;
 	bool			destroy_next_frame;
