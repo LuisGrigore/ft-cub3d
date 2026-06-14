@@ -70,7 +70,7 @@ void	ft_calc_wall(t_ray *r, t_engine *g);
 void	ft_draw_wall(t_engine *g, t_ray *r, int x);
 
 void	ft_init_engine(t_engine *g);
-void	ft_start_engine(t_engine *g);
+int	ft_start_engine(t_engine *g);
 void	ft_free_engine(t_engine *g);
 int		ft_close(int keycode, void *param);
 

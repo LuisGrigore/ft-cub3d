@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:51:21 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:34:00 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static int	ft_update(void *engine_ptr)
 	
 	engine = engine_ptr;
 	if (engine->destroy_next_frame)
-		return (ft_close(0, engine));
+		return (ft_screen_stop(&engine->screen));
+		// return (ft_close(0, engine));
 	ft_move_player(&engine->player, engine);
 	fov = PI / 3;
 	angle = engine->player.angle - fov / 2;
@@ -52,9 +53,9 @@ static int	ft_update(void *engine_ptr)
 	return (0);
 }
 
-void	ft_start_engine(t_engine *g)
+int	ft_start_engine(t_engine *g)
 {
-	ft_screen_start(&g->screen);
+	return ft_screen_start(&g->screen);
 }
 
 static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
@@ -88,7 +89,7 @@ void	ft_init_engine(t_engine *g)
 {
 	ft_init_screen(&g->screen, &(t_screen_config){.width = WIDTH,
 		.height = HEIGHT, .title = "Cub3D",
-		.loop = (t_loop_hook){.func = ft_update, .param = g}});
+		.loop = (t_hook){.func = ft_update, .param = g}});
 	
 	ft_init_player(&g->player, g->final->f_player);
 	g->colorC = g->final->colorC;
@@ -99,9 +100,9 @@ void	ft_init_engine(t_engine *g)
 	ft_load_texture(g, &g->we, g->final->text_we);
 	ft_load_texture(g, &g->ea, g->final->text_ea);
 	g->destroy_next_frame = false;
-	ft_screen_x_hook(&g->screen, (t_loop_hook){.func = ft_exit_next_frame, .param = g});
-	ft_screen_hook(&g->screen, (t_screen_hook){2, 1L << 0, ft_key_press,
+	ft_screen_x_hook(&g->screen, (t_hook){.func = ft_exit_next_frame, .param = g});
+	ft_screen_hook(&g->screen, (t_key_hook){2, 1L << 0, ft_key_press,
 		g});
-	ft_screen_hook(&g->screen, (t_screen_hook){3, 1L << 1,
+	ft_screen_hook(&g->screen, (t_key_hook){3, 1L << 1,
 		ft_player_key_release, &g->player});
 }

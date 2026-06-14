@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:37:46 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:51:13 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:31:26 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_close(int keycode, void *param)
 	ft_free_engine(g);
 	free(g);
 	g = NULL;
-	exit(0);
+	return (0);
 }
 
 void	ft_free_engine(t_engine *g)

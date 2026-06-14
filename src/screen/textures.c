@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:52:34 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/12 22:51:14 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:25:13 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,6 @@ void	ft_screen_texture_put_pixel(t_texture *tex, int x, int y, int color)
 	tex->data[i] = color & 0xFF;
 	tex->data[i + 1] = (color >> 8) & 0xFF;
 	tex->data[i + 2] = (color >> 16) & 0xFF;
-}
-
-void	ft_screen_destroy(t_screen *screen)
-{
-	if (!screen)
-		return ;
-	if (screen->buffer.img)
-		mlx_destroy_image(screen->mlx, screen->buffer.img);
-	if (screen->win)
-		mlx_destroy_window(screen->mlx, screen->win);
-	if (screen->mlx)
-	{
-		mlx_destroy_display(screen->mlx);
-		free(screen->mlx);
-	}
-	screen->mlx = NULL;
-	screen->win = NULL;
 }
 
 void	ft_screen_texture_destroy(t_screen *screen, t_texture *tex)

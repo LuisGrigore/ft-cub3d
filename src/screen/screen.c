@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 21:01:52 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/14 15:38:18 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:34:00 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	ft_init_screen(t_screen *screen, t_screen_config *config)
 	screen->loop = config->loop;
 }
 
-void	ft_screen_hook(t_screen *screen, t_screen_hook hook)
+void	ft_screen_hook(t_screen *screen, t_key_hook hook)
 {
 	mlx_hook(screen->win, hook.event, hook.mask, (int (*)()) hook.func, hook.param);
 }
 
-void			ft_screen_x_hook(t_screen *screen, t_loop_hook hook)
+void			ft_screen_x_hook(t_screen *screen, t_hook hook)
 {
 	mlx_hook(screen->win, 17, 0, hook.func, hook.param);
 }
@@ -51,10 +51,32 @@ static int	ft_render_loop(void *param)
 	return (0);
 }
 
-void	ft_screen_start(t_screen *screen)
+int	ft_screen_start(t_screen *screen)
 {
 	mlx_loop_hook(screen->mlx, (int (*)()) ft_render_loop, screen);
-	mlx_loop(screen->mlx);
+	return mlx_loop(screen->mlx);
+}
+
+int ft_screen_stop(t_screen *screen)
+{
+	return mlx_loop_end(screen->mlx);
+}
+
+void	ft_screen_destroy(t_screen *screen)
+{
+	if (!screen)
+		return ;
+	if (screen->buffer.img)
+		mlx_destroy_image(screen->mlx, screen->buffer.img);
+	if (screen->win)
+		mlx_destroy_window(screen->mlx, screen->win);
+	if (screen->mlx)
+	{
+		mlx_destroy_display(screen->mlx);
+		free(screen->mlx);
+	}
+	screen->mlx = NULL;
+	screen->win = NULL;
 }
 
 void	ft_screen_put_pixel(t_screen *screen, int x, int y, int color)

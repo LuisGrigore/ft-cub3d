@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:51:09 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:30:02 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int	main(int argc, char **argv)
 {
 	t_engine	*engine;
+	int ret;
 
 	if (argc != 2)
 		return (printf("Usage: %s <scene_path>\n", argv[0]), 1);
@@ -28,6 +29,7 @@ int	main(int argc, char **argv)
 	if (!engine->final)
 		return (free(engine), printf("Error parse\n"), 1);
 	ft_init_engine(engine);
-	ft_start_engine(engine);
-	return (0);
+	ret = ft_start_engine(engine);
+	ft_close(0, engine);
+	return (ret);
 }

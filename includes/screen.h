@@ -6,29 +6,29 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 21:18:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/14 15:37:32 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:34:00 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCREEN_H
 # define SCREEN_H
 
-typedef int		(*t_hook_func)(int keycode, void *param);
-typedef int		(*t_loop_func)(void *param);
+typedef int		(*t_key_hook_func)(int keycode, void *param);
+typedef int		(*t_hook_func)(void *param);
 
-typedef struct s_loop_hook
+typedef struct s_hook
 {
-	t_loop_func	func;
+	t_hook_func	func;
 	void		*param;
-}				t_loop_hook;
+}				t_hook;
 
-typedef struct s_screeen_hook
+typedef struct s_key_hook
 {
 	int			event;
 	int			mask;
-	t_hook_func	func;
+	t_key_hook_func	func;
 	void		*param;
-}				t_screen_hook;
+}				t_key_hook;
 
 typedef struct s_texture
 {
@@ -50,7 +50,7 @@ typedef struct s_screen
 	int			width;
 	int			height;
 
-	t_loop_hook	loop;
+	t_hook	loop;
 
 }				t_screen;
 
@@ -59,7 +59,7 @@ typedef struct s_screen_config
 	int			width;
 	int			height;
 	char		*title;
-	t_loop_hook	loop;
+	t_hook	loop;
 }				t_screen_config;
 
 /* Init / Destroy */
@@ -67,9 +67,10 @@ void			ft_init_screen(t_screen *screen, t_screen_config *config);
 void			ft_screen_destroy(t_screen *screen);
 
 /* Lifecycle */
-void			ft_screen_hook(t_screen *screen, t_screen_hook hook);
-void			ft_screen_x_hook(t_screen *screen, t_loop_hook hook);
-void			ft_screen_start(t_screen *screen);
+void			ft_screen_hook(t_screen *screen, t_key_hook hook);
+void			ft_screen_x_hook(t_screen *screen, t_hook hook);
+int			ft_screen_start(t_screen *screen);
+int			ft_screen_stop(t_screen *screen);
 void			ft_screen_put_pixel(t_screen *screen, int x, int y, int color);
 
 /* Texture Management */
