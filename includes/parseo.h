@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 14:13:30 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:07:14 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_header
 
 typedef struct s_map
 {
-	char			**map;
+	char			**grid;
 	int				height;
 	int				len_max;
 
@@ -56,9 +56,9 @@ typedef struct s_parseo
 	char			player_dir;
 }					t_parseo;
 
-typedef struct s_final_parse
+typedef struct s_parse_result
 {
-	t_map			*grid;
+	t_map			*map;
 	t_player_config	f_player;
 	int				colorF;
 	int				colorC;
@@ -68,19 +68,19 @@ typedef struct s_final_parse
 	char			*text_ea;
 	char			*color_f;
 	char			*color_c;
-}					t_final_parse;
+}					t_parse_result;
 
 //**************PARSE*****************************
 int				ft_init_parse(t_parseo *parse);
 char			*get_next_line(int fd);
-t_final_parse	*ft_parse(char *path);
+t_parse_result	*ft_parse(char *path);
 char			*ft_header(t_parseo *parse);
 int				ft_inst_header(t_header **head, const char *line);
 int				ft_check_header(t_header *h);
 int				ft_read_map(t_parseo *parse, t_line **list);
 char			**ft_norm_map(t_line *lst, t_parseo *parse);
 int				ft_val_map(char **map, int height, t_parseo *parse);
-t_final_parse	*ft_final_parse(t_parseo *parse);
+t_parse_result	*ft_final_parse(t_parseo *parse);
 
 //**************UTILS*****************************
 void			ft_skip_spc(const char *line, int *i);
@@ -98,5 +98,5 @@ void			ft_assign(float **px, float **py, int pos[2], char **map);
 void			ft_free_split(char **split);
 void			ft_del_list(t_line **list);
 void			ft_free_parseo(t_parseo **parse);
-void			ft_free_final_parse(t_final_parse **final);
+void			ft_delete_parse_result(t_parse_result **final);
 #endif

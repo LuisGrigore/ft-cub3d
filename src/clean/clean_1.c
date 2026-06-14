@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:23 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/13 16:31:12 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:47:56 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	ft_clean_map(t_map **map)
 {
 	int	i;
 
-	if (!map || !*map || !(*map)->map)
+	if (!map || !*map || !(*map)->grid)
 		return ;
 	i = 0;
-	while ((*map)->map[i])
-		free((*map)->map[i++]);
-	free((*map)->map);
+	while ((*map)->grid[i])
+		free((*map)->grid[i++]);
+	free((*map)->grid);
 }
 
 void	ft_free_parseo(t_parseo **parse)

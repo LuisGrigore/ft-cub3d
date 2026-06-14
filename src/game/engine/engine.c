@@ -6,14 +6,15 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 17:34:00 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:14:04 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
+#include "../../../externals/libft/libft.h"
+#include <stdlib.h>
 
-#include "../../../externals/minilibx-linux/mlx.h"
 
 static void	ft_draw_line(t_engine *g, float angle, int x)
 {
@@ -25,6 +26,76 @@ static void	ft_draw_line(t_engine *g, float angle, int x)
 	ft_calc_wall(&r, g);
 	ft_draw_wall(g, &r, x);
 }
+
+static int	touch(float x, float y, t_engine *g)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)(x / BLOCK);
+	map_y = (int)(y / BLOCK);
+	if (!g->map || !g->map[map_y])
+		return (1);
+	return (g->map[map_y][map_x] == '1');
+}
+
+static void	ft_move_2(t_player *p, t_engine *g, float speed)
+{
+	float	nx;
+	float	ny;
+
+	if (p->key_left)
+	{
+		nx = p->x - sin(p->angle) * speed;
+		ny = p->y + cos(p->angle) * speed;
+		if (!touch(nx, p->y, g))
+			p->x = nx;
+		if (!touch(p->x, ny, g))
+			p->y = ny;
+	}
+	if (p->key_right)
+	{
+		nx = p->x + sin(p->angle) * speed;
+		ny = p->y - cos(p->angle) * speed;
+		if (!touch(nx, p->y, g))
+			p->x = nx;
+		if (!touch(p->x, ny, g))
+			p->y = ny;
+	}
+	if (p->left_rotate)
+		p->angle -= 0.03;
+	if (p->right_rotate)
+		p->angle += 0.03;
+}
+
+static void	ft_move_player(t_player *p, t_engine *g)
+{
+	float	speed;
+	float	nx;
+	float	ny;
+
+	speed = 3;
+	if (p->key_up)
+	{
+		nx = p->x + cos(p->angle) * speed;
+		ny = p->y + sin(p->angle) * speed;
+		if (!touch(nx, p->y, g))
+			p->x = nx;
+		if (!touch(p->x, ny, g))
+			p->y = ny;
+	}
+	if (p->key_down)
+	{
+		nx = p->x - cos(p->angle) * speed;
+		ny = p->y - sin(p->angle) * speed;
+		if (!touch(nx, p->y, g))
+			p->x = nx;
+		if (!touch(p->x, ny, g))
+			p->y = ny;
+	}
+	ft_move_2(p, g, speed);
+}
+
 
 static int	ft_update(void *engine_ptr)
 {
@@ -38,7 +109,6 @@ static int	ft_update(void *engine_ptr)
 	engine = engine_ptr;
 	if (engine->destroy_next_frame)
 		return (ft_screen_stop(&engine->screen));
-		// return (ft_close(0, engine));
 	ft_move_player(&engine->player, engine);
 	fov = PI / 3;
 	angle = engine->player.angle - fov / 2;
@@ -61,48 +131,101 @@ int	ft_start_engine(t_engine *g)
 static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
 {
 	if (ft_screen_texture_load(&g->screen, tex, path) != 0)
-		ft_free_engine(g);
+		ft_destory_engine(g);
 }
-#include <stdio.h>
-static int ft_exit_next_frame(void *param)
+static int ft_exit_next_frame(void *engine_ptr)
 {
-	t_engine	*g;
+	t_engine	*engine;
 	
-	g = (t_engine *)param;
-
-	g->destroy_next_frame = true;
+	engine = (t_engine *)engine_ptr;
+	engine->destroy_next_frame = true;
 	return 0;
 }
 
-static int ft_key_press(int keycode, void *param)
+static int ft_key_press(int keycode, void *engine_ptr)
 {
-	t_engine *engine = (t_engine *)param;
+	t_engine *engine = (t_engine *)engine_ptr;
 
 	if (keycode == ESC)
-		ft_exit_next_frame(param);
+		ft_exit_next_frame(engine_ptr);
 
 	return ft_player_key_press(keycode, (void*) &engine->player);
 
 }
 
-void	ft_init_engine(t_engine *g)
+char	**ft_copy_matrix(char **matrix)
 {
-	ft_init_screen(&g->screen, &(t_screen_config){.width = WIDTH,
-		.height = HEIGHT, .title = "Cub3D",
-		.loop = (t_hook){.func = ft_update, .param = g}});
+	char	**copy;
+	int		rows;
+	int		i;
+
+	rows = 0;
+	while (matrix[rows])
+		rows++;
+	copy = malloc(sizeof(char *) * (rows + 1));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (i < rows)
+	{
+		copy[i] = ft_strdup(matrix[i]);
+		if (!copy[i])
+		{
+			while (--i >= 0)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
+		i++;
+	}
+	copy[rows] = NULL;
+	return (copy);
+}
+
+t_engine	*ft_create_engine(t_engine_config config)
+{
+	t_engine *engine;
 	
-	ft_init_player(&g->player, g->final->f_player);
-	g->colorC = g->final->colorC;
-	g->colorF = g->final->colorF;
-	g->map = g->final->grid->map;
-	ft_load_texture(g, &g->no, g->final->text_no);
-	ft_load_texture(g, &g->so, g->final->text_so);
-	ft_load_texture(g, &g->we, g->final->text_we);
-	ft_load_texture(g, &g->ea, g->final->text_ea);
-	g->destroy_next_frame = false;
-	ft_screen_x_hook(&g->screen, (t_hook){.func = ft_exit_next_frame, .param = g});
-	ft_screen_hook(&g->screen, (t_key_hook){2, 1L << 0, ft_key_press,
-		g});
-	ft_screen_hook(&g->screen, (t_key_hook){3, 1L << 1,
-		ft_player_key_release, &g->player});
+	engine = ft_calloc(1, sizeof(t_engine));
+	if (!engine)
+		return (NULL);
+		
+	ft_init_screen(&engine->screen, &(t_screen_config){.width = WIDTH,
+		.height = HEIGHT, .title = "Cub3D",
+		.loop = (t_hook){.func = ft_update, .param = engine}});
+	
+	ft_init_player(&engine->player, config.player_config);
+	engine->colorC = config.colorC;
+	engine->colorF = config.colorF;
+	engine->map = ft_copy_matrix(config.map);
+	ft_load_texture(engine, &engine->no, config.text_no_path);
+	ft_load_texture(engine, &engine->so, config.text_so_path);
+	ft_load_texture(engine, &engine->we, config.text_we_path);
+	ft_load_texture(engine, &engine->ea, config.text_ea_path);
+	engine->destroy_next_frame = false;
+	ft_screen_x_hook(&engine->screen, (t_hook){.func = ft_exit_next_frame, .param = engine});
+	ft_screen_hook(&engine->screen, (t_key_hook){2, 1L << 0, ft_key_press,
+		engine});
+	ft_screen_hook(&engine->screen, (t_key_hook){3, 1L << 1,
+		ft_player_key_release, &engine->player});
+	return (engine);
+}
+void	ft_destory_engine(t_engine *engine)
+{
+	if (!engine)
+		return ;
+	ft_screen_texture_destroy(&engine->screen, &engine->no);
+	ft_screen_texture_destroy(&engine->screen, &engine->so);
+	ft_screen_texture_destroy(&engine->screen, &engine->we);
+	ft_screen_texture_destroy(&engine->screen, &engine->ea);
+	int	i;
+	if (engine->map)
+	{
+		i = 0;
+		while (engine->map[i])
+			free(engine->map[i++]);
+		free(engine->map);
+	}
+	ft_screen_destroy(&engine->screen);
+	free(engine);
 }

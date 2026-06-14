@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:17 by juan-her          #+#    #+#             */
-/*   Updated: 2026/05/22 23:15:44 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 17:47:56 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_init_header(t_header **header)
 
 static void	ft_init_map(t_map **map)
 {
-	(*map)->map = NULL;
+	(*map)->grid = NULL;
 	(*map)->height = 0;
 	(*map)->len_max = 0;
 }

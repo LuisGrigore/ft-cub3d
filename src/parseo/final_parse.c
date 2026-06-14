@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:27:01 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:51:38 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:03:16 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,27 @@ static t_map	*ft_create_grid(t_map *map)
 	grid = (t_map *)malloc(sizeof(t_map));
 	if (!grid)
 		return (NULL);
-	grid->map = (char **)malloc(sizeof(char *) * (map->height + 1));
+	grid->grid = (char **)malloc(sizeof(char *) * (map->height + 1));
 	i = 0;
-	while (map->map[i])
+	while (map->grid[i])
 	{
-		grid->map[i] = ft_strdup(map->map[i]);
+		grid->grid[i] = ft_strdup(map->grid[i]);
 		i++;
 	}
-	grid->map[i] = NULL;
+	grid->grid[i] = NULL;
 	grid->height = map->height;
 	grid->len_max = map->len_max;
 	return (grid);
 }
 
-t_final_parse	*ft_final_parse(t_parseo *parse)
+t_parse_result	*ft_final_parse(t_parseo *parse)
 {
-	t_final_parse	*final;
+	t_parse_result	*final;
 
-	final = ft_calloc(1, sizeof(t_final_parse));
+	final = ft_calloc(1, sizeof(t_parse_result));
 	if (!final)
 		return (NULL);
-	final->grid = ft_create_grid(parse->map);
+	final->map = ft_create_grid(parse->map);
 	final->colorC = ft_rgb_to_int(parse->header->color_c);
 	final->colorF = ft_rgb_to_int(parse->header->color_f);
 	final->f_player.starting_x = (parse->player_x + 0.5) * BLOCK;

@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 17:26:21 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 14:12:55 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:16:47 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ static char	**ft_parse_map(t_parseo *parse, t_line **lst_map)
 	return (map);
 }
 
-t_final_parse	*ft_parse(char *path)
+t_parse_result	*ft_parse(char *path)
 {
 	t_parseo		*parse;
 	t_line			*lst_map;
 	char			**map;
-	t_final_parse	*final;
+	t_parse_result	*final;
 	
 	parse = ft_init_and_open(path);
 	if (!parse)
@@ -72,8 +72,35 @@ t_final_parse	*ft_parse(char *path)
 	map = ft_parse_map(parse, &lst_map);
 	if (!map)
 		return (ft_free_parseo(&parse), NULL);
-	parse->map->map = map;
+	parse->map->grid = map;
 	final = ft_final_parse(parse);
 	ft_free_parseo(&parse);
 	return (final);
+}
+
+void	ft_delete_parse_result(t_parse_result **final)
+{
+	int	i;
+
+	if (!final || !*final)
+		return ;
+	if ((*final)->map)
+	{
+		if ((*final)->map->grid)
+		{
+			i = 0;
+			while ((*final)->map->grid[i])
+				free((*final)->map->grid[i++]);
+			free((*final)->map->grid);
+		}
+		free((*final)->map);
+	}
+	free((*final)->text_no);
+	free((*final)->text_so);
+	free((*final)->text_we);
+	free((*final)->text_ea);
+	free((*final)->color_f);
+	free((*final)->color_c);
+	free(*final);
+	*final = NULL;
 }

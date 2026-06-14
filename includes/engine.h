@@ -13,14 +13,11 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# include "parseo.h"
 # include "player.h"
 # include "screen.h"
 # include <math.h>
 # include <stdbool.h>
 
-typedef struct s_player			t_player;
-typedef struct s_final_parse	t_final_parse;
 
 typedef struct s_engine
 {
@@ -33,11 +30,21 @@ typedef struct s_engine
 	t_texture		ea;
 	int				colorF;
 	int				colorC;
-	int				block_size;
-	t_final_parse	*final;
-
 	bool			destroy_next_frame;
 }				t_engine;
+
+typedef struct s_engine_config
+{
+
+	t_player_config	player_config;
+	char			**map;
+	int				colorF;
+	int				colorC;
+	char			*text_no_path;
+	char			*text_so_path;
+	char			*text_we_path;
+	char			*text_ea_path;
+}				t_engine_config;
 
 typedef struct s_ray
 {
@@ -69,9 +76,9 @@ void	ft_perform_dda(t_ray *r, t_engine *g);
 void	ft_calc_wall(t_ray *r, t_engine *g);
 void	ft_draw_wall(t_engine *g, t_ray *r, int x);
 
-void	ft_init_engine(t_engine *g);
+t_engine	*ft_create_engine(t_engine_config config);
 int	ft_start_engine(t_engine *g);
-void	ft_free_engine(t_engine *g);
+void	ft_destory_engine(t_engine *g);
 int		ft_close(int keycode, void *param);
 
 
