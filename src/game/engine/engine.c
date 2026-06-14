@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:14:04 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:25:46 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int	ft_update(void *engine_ptr)
 	
 	engine = engine_ptr;
 	if (engine->destroy_next_frame)
-		return (ft_screen_stop(&engine->screen));
+		return (ft_screen_stop(engine->screen));
 	ft_move_player(&engine->player, engine);
 	fov = PI / 3;
 	angle = engine->player.angle - fov / 2;
@@ -125,12 +125,12 @@ static int	ft_update(void *engine_ptr)
 
 int	ft_start_engine(t_engine *g)
 {
-	return ft_screen_start(&g->screen);
+	return ft_screen_start(g->screen);
 }
 
 static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
 {
-	if (ft_screen_texture_load(&g->screen, tex, path) != 0)
+	if (ft_screen_texture_load(g->screen, tex, path) != 0)
 		ft_destory_engine(g);
 }
 static int ft_exit_next_frame(void *engine_ptr)
@@ -190,7 +190,7 @@ t_engine	*ft_create_engine(t_engine_config config)
 	if (!engine)
 		return (NULL);
 		
-	ft_init_screen(&engine->screen, &(t_screen_config){.width = WIDTH,
+	engine->screen = ft_init_screen((t_screen_config){.width = WIDTH,
 		.height = HEIGHT, .title = "Cub3D",
 		.loop = (t_hook){.func = ft_update, .param = engine}});
 	
@@ -203,10 +203,10 @@ t_engine	*ft_create_engine(t_engine_config config)
 	ft_load_texture(engine, &engine->we, config.text_we_path);
 	ft_load_texture(engine, &engine->ea, config.text_ea_path);
 	engine->destroy_next_frame = false;
-	ft_screen_x_hook(&engine->screen, (t_hook){.func = ft_exit_next_frame, .param = engine});
-	ft_screen_hook(&engine->screen, (t_key_hook){2, 1L << 0, ft_key_press,
+	ft_screen_x_hook(engine->screen, (t_hook){.func = ft_exit_next_frame, .param = engine});
+	ft_screen_hook(engine->screen, (t_key_hook){2, 1L << 0, ft_key_press,
 		engine});
-	ft_screen_hook(&engine->screen, (t_key_hook){3, 1L << 1,
+	ft_screen_hook(engine->screen, (t_key_hook){3, 1L << 1,
 		ft_player_key_release, &engine->player});
 	return (engine);
 }
@@ -214,10 +214,10 @@ void	ft_destory_engine(t_engine *engine)
 {
 	if (!engine)
 		return ;
-	ft_screen_texture_destroy(&engine->screen, &engine->no);
-	ft_screen_texture_destroy(&engine->screen, &engine->so);
-	ft_screen_texture_destroy(&engine->screen, &engine->we);
-	ft_screen_texture_destroy(&engine->screen, &engine->ea);
+	ft_screen_texture_destroy(engine->screen, &engine->no);
+	ft_screen_texture_destroy(engine->screen, &engine->so);
+	ft_screen_texture_destroy(engine->screen, &engine->we);
+	ft_screen_texture_destroy(engine->screen, &engine->ea);
 	int	i;
 	if (engine->map)
 	{
@@ -226,6 +226,6 @@ void	ft_destory_engine(t_engine *engine)
 			free(engine->map[i++]);
 		free(engine->map);
 	}
-	ft_screen_destroy(&engine->screen);
+	ft_screen_destroy(engine->screen);
 	free(engine);
 }

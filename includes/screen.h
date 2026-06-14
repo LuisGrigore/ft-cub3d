@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 21:18:12 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/14 17:34:00 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:22:51 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_screen_config
 }				t_screen_config;
 
 /* Init / Destroy */
-void			ft_init_screen(t_screen *screen, t_screen_config *config);
+t_screen	*ft_init_screen(t_screen_config config);
 void			ft_screen_destroy(t_screen *screen);
 
 /* Lifecycle */

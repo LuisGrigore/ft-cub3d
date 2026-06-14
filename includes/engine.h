@@ -21,7 +21,7 @@
 
 typedef struct s_engine
 {
-	t_screen		screen;
+	t_screen		*screen;
 	t_player		player;
 	char			**map;
 	t_texture		no;
