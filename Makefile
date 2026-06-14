@@ -6,7 +6,7 @@
 #    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
-#    Updated: 2026/06/14 18:17:24 by lgrigore         ###   ########.fr        #
+#    Updated: 2026/06/14 18:42:32 by lgrigore         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ CFLAGS		= -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
 MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # SRC FILES
-PARSE_SRCS = init_parse.c parse.c header.c check_header.c map.c check_map.c final_parse.c
-CLEAN_SRCS = clean_1.c
+PARSE_SRCS = init_parse.c parse.c header.c check_header.c map.c check_map.c final_parse.c clean_1.c
 UTILS_FILE_SRC = get_next_line.c utils.c utils_map.c
 ENGINE_SRCS = calc_wall.c ray.c engine.c
 PLAYER_SRCS =  player.c
