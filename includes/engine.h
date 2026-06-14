@@ -15,7 +15,6 @@
 
 # include "player.h"
 # include "screen.h"
-# include <math.h>
 # include <stdbool.h>
 
 
@@ -79,7 +78,5 @@ void	ft_draw_wall(t_engine *g, t_ray *r, int x);
 t_engine	*ft_create_engine(t_engine_config config);
 int	ft_start_engine(t_engine *g);
 void	ft_destory_engine(t_engine *g);
-int		ft_close(int keycode, void *param);
-
 
 #endif

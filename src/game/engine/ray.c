@@ -6,13 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:40:59 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:24:49 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:34:23 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
-
+# include <math.h>
 
 void	ft_init_ray(t_ray *r, t_engine *g, float angle)
 {

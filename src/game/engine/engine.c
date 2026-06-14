@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:32:16 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:38:44 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../../includes/engine.h"
 #include "../../../externals/libft/libft.h"
 #include <stdlib.h>
+# include <math.h>
 
 
 static void	ft_draw_line(t_engine *g, float angle, int x)
@@ -39,61 +40,61 @@ static int	touch(float x, float y, t_engine *g)
 	return (g->map[map_y][map_x] == '1');
 }
 
-static void	ft_move_2(t_player *p, t_engine *g, float speed)
+static void	ft_apply_speed(t_engine *engine, float speed)
 {
 	float	nx;
 	float	ny;
 
-	if (p->key_left)
+	if (engine->player.key_left)
 	{
-		nx = p->x - sin(p->angle) * speed;
-		ny = p->y + cos(p->angle) * speed;
-		if (!touch(nx, p->y, g))
-			p->x = nx;
-		if (!touch(p->x, ny, g))
-			p->y = ny;
+		nx = engine->player.x - sin(engine->player.angle) * speed;
+		ny = engine->player.y + cos(engine->player.angle) * speed;
+		if (!touch(nx, engine->player.y, engine))
+			engine->player.x = nx;
+		if (!touch(engine->player.x, ny, engine))
+			engine->player.y = ny;
 	}
-	if (p->key_right)
+	if (engine->player.key_right)
 	{
-		nx = p->x + sin(p->angle) * speed;
-		ny = p->y - cos(p->angle) * speed;
-		if (!touch(nx, p->y, g))
-			p->x = nx;
-		if (!touch(p->x, ny, g))
-			p->y = ny;
+		nx = engine->player.x + sin(engine->player.angle) * speed;
+		ny = engine->player.y - cos(engine->player.angle) * speed;
+		if (!touch(nx, engine->player.y, engine))
+			engine->player.x = nx;
+		if (!touch(engine->player.x, ny, engine))
+			engine->player.y = ny;
 	}
-	if (p->left_rotate)
-		p->angle -= 0.03;
-	if (p->right_rotate)
-		p->angle += 0.03;
+	if (engine->player.left_rotate)
+		engine->player.angle -= 0.03;
+	if (engine->player.right_rotate)
+		engine->player.angle += 0.03;
 }
 
-static void	ft_move_player(t_player *p, t_engine *g)
+static void	ft_move_player(t_engine *engine)
 {
 	float	speed;
 	float	nx;
 	float	ny;
 
 	speed = 3;
-	if (p->key_up)
+	if (engine->player.key_up)
 	{
-		nx = p->x + cos(p->angle) * speed;
-		ny = p->y + sin(p->angle) * speed;
-		if (!touch(nx, p->y, g))
-			p->x = nx;
-		if (!touch(p->x, ny, g))
-			p->y = ny;
+		nx = engine->player.x + cos(engine->player.angle) * speed;
+		ny = engine->player.y + sin(engine->player.angle) * speed;
+		if (!touch(nx, engine->player.y, engine))
+			engine->player.x = nx;
+		if (!touch(engine->player.x, ny, engine))
+			engine->player.y = ny;
 	}
-	if (p->key_down)
+	if (engine->player.key_down)
 	{
-		nx = p->x - cos(p->angle) * speed;
-		ny = p->y - sin(p->angle) * speed;
-		if (!touch(nx, p->y, g))
-			p->x = nx;
-		if (!touch(p->x, ny, g))
-			p->y = ny;
+		nx = engine->player.x - cos(engine->player.angle) * speed;
+		ny = engine->player.y - sin(engine->player.angle) * speed;
+		if (!touch(nx, engine->player.y, engine))
+			engine->player.x = nx;
+		if (!touch(engine->player.x, ny, engine))
+			engine->player.y = ny;
 	}
-	ft_move_2(p, g, speed);
+	ft_apply_speed(engine, speed);
 }
 
 
@@ -109,7 +110,7 @@ static int	ft_update(void *engine_ptr)
 	engine = engine_ptr;
 	if (engine->destroy_next_frame)
 		return (ft_screen_stop(engine->screen));
-	ft_move_player(&engine->player, engine);
+	ft_move_player(engine);
 	fov = PI / 3;
 	angle = engine->player.angle - fov / 2;
 	step = fov / WIDTH;
