@@ -6,14 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:40:10 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:51:21 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
-// #include "../../../includes/player.h"
-// #include "../../../includes/parseo.h"
+
 #include "../../../externals/minilibx-linux/mlx.h"
 
 static void	ft_draw_line(t_engine *g, float angle, int x)

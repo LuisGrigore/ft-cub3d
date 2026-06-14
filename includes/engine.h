@@ -15,7 +15,6 @@
 
 # include "parseo.h"
 # include "player.h"
-// # include "config.h"
 # include "screen.h"
 # include <math.h>
 # include <stdbool.h>

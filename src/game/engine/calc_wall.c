@@ -6,14 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 22:15:38 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:09:26 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:51:17 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
-// #include "../../../includes/player.h"
-// #include "../../../includes/parseo.h"
+
 
 static t_texture	*ft_side_x(t_ray *r, t_engine *g)
 {

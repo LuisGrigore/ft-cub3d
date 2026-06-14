@@ -6,15 +6,14 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 14:57:48 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:51:09 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/config.h"
 #include "../includes/engine.h"
 #include "../includes/parseo.h"
-// #include "../includes/player.h"
-// #include "../includes/screen.h"
+
 
 int	main(int argc, char **argv)
 {

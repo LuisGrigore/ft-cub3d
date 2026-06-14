@@ -6,12 +6,11 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:03:39 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:09:42 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:51:36 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/config.h"
-// #include "../../../includes/engine.h"
 #include "../../../includes/player.h"
 
 void	ft_init_player(t_player *player, t_player_config config)

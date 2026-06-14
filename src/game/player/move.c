@@ -6,13 +6,12 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:57:44 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:09:49 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:51:32 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
-// #include "../../../includes/player.h"
 
 static int	touch(float x, float y, t_engine *g)
 {

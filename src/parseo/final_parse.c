@@ -6,13 +6,12 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:27:01 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 15:13:16 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:51:38 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/config.h"
 #include "../../includes/parseo.h"
-// #include "../../includes/player.h"
 
 static int	ft_rgb_to_int(char *color)
 {
