@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/15 03:55:40 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 18:29:20 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	main(int argc, char **argv)
 	parse_result = ft_parse(argv[1]);
 	if (!parse_result)
 		return (printf("Error parsing\n"), 1);
-	ft_print_parse_result(parse_result);
+	// ft_print_parse_result(parse_result);
 	engine = ft_create_engine((t_engine_config){
 		.player_config = (t_player_config) {.starting_angle = parse_result->starting_angle,
 		.starting_x = parse_result->starting_x, .starting_y = parse_result->starting_y},
@@ -124,7 +124,7 @@ int	main(int argc, char **argv)
 		.text_we_path = parse_result->text_we_path,
 		.text_ea_path = parse_result->text_ea_path
 	});
-	ft_print_engine(engine);
+	// ft_print_engine(engine);
 	ft_delete_parse_result(parse_result);
 	parse_result = NULL;
 	if (!engine)
