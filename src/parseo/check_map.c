@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 23:34:22 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/12 22:39:33 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:40:36 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	ft_val_char_player(char **map, float *px, float *py)
 	return (1);
 }
 
-int	ft_val_map(char **map, int height, t_parseo *parse)
+int	ft_val_map(char **map, int height, t_parse *parse)
 {
 	if (!ft_val_char_player(map, &parse->player_x, &parse->player_y))
 		return (0);

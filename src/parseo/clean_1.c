@@ -6,13 +6,13 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:23 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 17:47:56 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 02:33:37 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
 
-void	ft_clean_header(t_header *h)
+static void	ft_clean_header(t_header *h)
 {
 	if (!h)
 		return ;
@@ -24,7 +24,7 @@ void	ft_clean_header(t_header *h)
 	free(h->color_c);
 }
 
-void	ft_clean_map(t_map **map)
+static void	ft_clean_map(t_map **map)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ void	ft_clean_map(t_map **map)
 	free((*map)->grid);
 }
 
-void	ft_free_parseo(t_parseo **parse)
+void	ft_free_parse(t_parse **parse)
 {
 	if (!parse || !*parse)
 		return ;
@@ -61,7 +61,7 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-void	ft_del_list(t_line **list)
+void	ft_delete_list(t_line **list)
 {
 	t_line	*tmp;
 	t_line	*lst;

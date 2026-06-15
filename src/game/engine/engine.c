@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:38:44 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 03:50:47 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,15 @@ t_engine	*ft_create_engine(t_engine_config config)
 	engine->colorC = config.colorC;
 	engine->colorF = config.colorF;
 	engine->map = ft_copy_matrix(config.map);
+	if (!engine->map)
+	    return (ft_destory_engine(engine), NULL);
+
 	engine->no = ft_screen_texture_load(engine->screen, config.text_no_path);
 	engine->so = ft_screen_texture_load(engine->screen, config.text_so_path);
 	engine->we = ft_screen_texture_load(engine->screen, config.text_we_path);
 	engine->ea = ft_screen_texture_load(engine->screen, config.text_ea_path);
+	if (!engine->no || !engine->so || !engine->we || !engine->ea)
+	    return (ft_destory_engine(engine), NULL);
 
 	engine->destroy_next_frame = false;
 	ft_screen_x_hook(engine->screen, (t_hook){.func = ft_exit_next_frame, .param = engine});

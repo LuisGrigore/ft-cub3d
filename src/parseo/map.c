@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-her <juan-her@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:18:16 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/13 16:05:03 by juan-her         ###   ########.fr       */
+/*   Updated: 2026/06/15 02:33:37 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
 
-int	ft_read_map(t_parseo *parse, t_line **list)
+int	ft_read_map(t_parse *parse, t_line **list)
 {
 	char	*line;
 	char	*temp;
@@ -37,22 +37,22 @@ int	ft_read_map(t_parseo *parse, t_line **list)
 	return (1);
 }
 
-static int	ft_get_weigth(t_line *lst)
+static int	ft_get_width(t_line *lst)
 {
 	t_line	*tmp;
-	int		w;
+	int		max_width;
 	int		len;
 
 	tmp = lst;
-	w = 0;
+	max_width = 0;
 	while (tmp)
 	{
 		len = ft_strlen(tmp->text);
-		if (w < len)
-			w = len;
+		if (max_width < len)
+			max_width = len;
 		tmp = tmp->next;
 	}
-	return (w);
+	return (max_width);
 }
 
 static char	*ft_reg_line(char *line, int w)
@@ -78,7 +78,7 @@ static char	*ft_reg_line(char *line, int w)
 	return (str);
 }
 
-char	**ft_norm_map(t_line *lst, t_parseo *parse)
+char	**ft_norm_map(t_line *lst, t_parse *parse)
 {
 	char	**map;
 	t_line	*tmp;
@@ -86,7 +86,7 @@ char	**ft_norm_map(t_line *lst, t_parseo *parse)
 
 	if (!lst)
 		return (NULL);
-	parse->map->len_max = ft_get_weigth(lst);
+	parse->map->len_max = ft_get_width(lst);
 	map = ft_calloc(ft_len_lines(lst) + 1, sizeof(char *));
 	if (!map)
 		return (NULL);
@@ -102,6 +102,6 @@ char	**ft_norm_map(t_line *lst, t_parseo *parse)
 	}
 	map[i] = NULL;
 	parse->map->height = i;
-	ft_del_list(&lst);
+	ft_delete_list(&lst);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:17 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 17:47:56 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:40:36 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_init_map(t_map **map)
 	(*map)->len_max = 0;
 }
 
-int	ft_init_parse(t_parseo *parse)
+int	ft_init_parse(t_parse *parse)
 {
 	parse->header = ft_calloc(1, sizeof(t_header));
 	if (!parse->header)
