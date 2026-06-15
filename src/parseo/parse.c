@@ -6,11 +6,12 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 17:26:21 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/15 18:35:05 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 18:44:12 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
+# include "../../externals/libft/libft.h"
 
 void	ft_free_split(char **split)
 {

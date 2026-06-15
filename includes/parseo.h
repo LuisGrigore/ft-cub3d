@@ -6,19 +6,14 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/15 18:29:57 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 18:41:22 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSEO_H
 # define PARSEO_H
 
-# include "../libft/libft.h"
-# include "./player.h"
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+
 
 typedef struct s_line
 {

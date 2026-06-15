@@ -6,11 +6,12 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:34 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:44:46 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 18:43:08 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parseo.h"
+# include "../../externals/libft/libft.h"
 
 static char	*ft_create(char **stack, char **buffer)
 {
