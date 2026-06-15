@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 17:26:21 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/15 18:28:30 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/15 18:35:05 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,7 +447,7 @@ void	ft_delete_parse_result(t_parse_result *final)
 		i = 0;
 		while (final->map[i])
 			free(final->map[i++]);
-		free(final->map);  // FIX: eliminado el segundo free duplicado
+		free(final->map);
 	}
 	free(final->text_no_path);
 	free(final->text_so_path);
@@ -598,6 +598,7 @@ t_parse_result	*ft_parse(char *path)
 	result = malloc(sizeof(t_parse_result));
 	if (!result)
 		return (close(fd), NULL);
+	result->map = NULL;
 	if (ft_parse_header(result, fd) == -1)
 	{
 		printf("Error parsing header\n");
