@@ -46,7 +46,7 @@ char	*ft_get_header_line_content(const char *line, int start)
 {
 	int	end;
 
-	start += ft_skip_spc(line + start);  // FIX: pasar puntero desplazado, no índice doble
+	start += ft_skip_spc(line + start);
 	end = ft_len_dir(line, start);
 	if (end <= start)
 		return (NULL);

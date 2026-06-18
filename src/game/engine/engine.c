@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:02:00 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/15 03:50:47 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/18 18:28:59 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,6 @@ int	ft_start_engine(t_engine *g)
 	return ft_screen_start(g->screen);
 }
 
-// static void	ft_load_texture(t_engine *g, t_texture *tex, char *path)
-// {
-// 	if (ft_screen_texture_load(g->screen, path) != 0)
-// 		ft_destory_engine(g);
-// }
 static int ft_exit_next_frame(void *engine_ptr)
 {
 	t_engine	*engine;

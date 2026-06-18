@@ -81,7 +81,7 @@ int	ft_check_inside(char **map, int y, int x)
 {
 	while (x >= 0)
 	{
-		if (x != 0 && ft_strchr("0NSEW", map[y][x]))  // ← era solo '0'
+		if (x != 0 && ft_strchr("0NSEW", map[y][x]))
 		{
 			if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
 				return (0);
