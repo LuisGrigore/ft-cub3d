@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parseo.h                                           :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/15 18:41:22 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/18 17:51:23 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSEO_H
-# define PARSEO_H
+#ifndef PARSER_H
+# define PARSER_H
 
 
 
@@ -21,7 +21,7 @@ typedef struct s_line
 	struct s_line	*next;
 }					t_line;
 
-typedef struct s_parse_result
+typedef struct s_parser_result
 {
 	char			**map;
 	float			starting_x;
@@ -33,10 +33,9 @@ typedef struct s_parse_result
 	char			*text_so_path;
 	char			*text_we_path;
 	char			*text_ea_path;
-}					t_parse_result;
+}					t_parser_result;
 
-//**************PARSE*****************************
-char			*get_next_line(int fd);
-t_parse_result	*ft_parse(char *path);
-void			ft_delete_parse_result(t_parse_result *result);
+//**************PARSER*****************************
+t_parser_result	*ft_parser(char *path);
+void			ft_delete_parser_result(t_parser_result *result);
 #endif

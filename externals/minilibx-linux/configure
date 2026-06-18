@@ -80,7 +80,7 @@ clean(){
 	${MAKE} -f Makefile.gen -C test/ --no-print-directory clean
 }
 
-parse_args(){
+parser_args(){
 	case "$1" in
 		--help | -h)
 			show_help
@@ -103,7 +103,7 @@ main(){
 		*) MAKE=make ;;
 	esac
 
-	parse_args "$@"
+	parser_args "$@"
 	if [ -z "$xlib_inc" ]; then
 		log_error "Can't find a suitable X11 include directory."
 		exit 1
