@@ -1,33 +1,80 @@
-NAME = game
-CC = cc
-SRC = src/main.c src/player.c src/engine.c src/screen_manager.c
-OBJ = $(SRC:.c=.o)
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
+#    Updated: 2026/06/18 17:50:14 by lgrigore         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CFLAGS = -Iexternal/ft-lib -Iexternal/mlx
-LDFLAGS = -L./external/mlx -lmlx -lXext -lX11 -lm -lz
-LIBS = external/ft-lib/libft.a external/mlx/libmlx.a
+NAME		= bandera
 
-.PHONY: all external clean fclean re
+SRC_DIR		= src
+OBJ_DIR		= obj
+INC_DIR		= includes
 
-all: external $(NAME)
+LIBFT_DIR	= ./externals/libft
+MLX_DIR		= ./externals/minilibx-linux
 
-external: external/ft-lib/libft.a external/mlx/libmlx.a
+CC			= cc
 
-external/ft-lib/libft.a:
-	make -C external/ft-lib
+CFLAGS		= -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
+				-O3 -g3 -Wno-cast-function-type
 
-external/mlx/libmlx.a:
-	make -C external/mlx
+MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(SRC) -o $(NAME) $(LIBS) $(LDFLAGS)
+# SRC FILES
+# PARSER_SRCS = init_parser.c parser.c header.c check_header.c map.c check_map.c final_parser.c clean_1.c get_next_line.c utils.c utils_map.c
+# PARSER_SRCS =  parser.c get_next_line.c
+PARSER_SRCS =  get_next_line.c  parser.c  parser_check.c  parser_color.c  parser_header.c  parser_header_utils.c  parser_line_list.c  parser_map.c  parser_validate_map.c
+ENGINE_SRCS = calc_wall.c ray.c engine.c
+PLAYER_SRCS =  player.c
+SCREEN_SRCS = textures.c screen.c
+
+SRCS		= $(addprefix $(SRC_DIR)/, main.c) \
+			  $(addprefix $(SRC_DIR)/parser/, $(PARSER_SRCS)) \
+			  $(addprefix $(SRC_DIR)/game/engine/, $(ENGINE_SRCS)) \
+			  $(addprefix $(SRC_DIR)/game/player/, $(PLAYER_SRCS)) \
+			  $(addprefix $(SRC_DIR)/screen/, $(SCREEN_SRCS)) \
+
+OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+LIBFT		= $(LIBFT_DIR)/libft.a
+MLX_LIB		= $(MLX_DIR)/libmlx.a
+
+# ---------------- RULES ---------------- #
+
+all: $(NAME)
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
+	
+$(MLX_LIB):
+	@$(MAKE) -C $(MLX_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(LIBFT) $(MLX_LIB) $(OBJS)
+	$(CC) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@echo "Bandera Negra done"
 
 clean:
-	rm -rf $(OBJ)
-	make -C external/ft-lib clean
-	make -C external/mlx clean
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "Objects delete"
 
 fclean: clean
-	rm -rf $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(MLX_DIR) clean
+	@rm -f $(NAME)
+	@echo "Cub3d delete"
 
 re: fclean all
+
+.PHONY: all clean fclean re
