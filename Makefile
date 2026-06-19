@@ -22,7 +22,7 @@ MLX_DIR		= ./externals/minilibx-linux
 CC			= cc
 
 CFLAGS		= -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) \
-				-O3 -g3 -Wno-cast-function-type
+				-O3 -g3
 
 MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 

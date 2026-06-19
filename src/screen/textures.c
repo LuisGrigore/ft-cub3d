@@ -26,7 +26,7 @@ t_texture *ft_screen_texture_load(t_screen *screen, const char *path)
 	tex->img = mlx_xpm_file_to_image(screen->mlx, (char *)path, &tex->width,
 			&tex->height);
 	if (!tex->img)
-		return (NULL);
+		return (ft_screen_texture_destroy(screen, tex), NULL);
 	tex->data = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len,
 			&tex->endian);
 	return (tex);

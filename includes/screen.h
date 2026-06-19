@@ -39,6 +39,7 @@ typedef struct s_texture
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			a;
 }				t_texture;
 
 typedef struct s_screen
