@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:52:34 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/19 21:12:53 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:14:46 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 t_texture	*ft_screen_texture_load(t_screen *screen, const char *path)
 {
 	t_texture	*tex;
-	// extern void *mlx_xpm_file_to_image(void *, char *, int *, int *);
-	// extern char *mlx_get_data_addr(void *, int *, int *, int *);
-	
+
 	tex = (t_texture *)malloc(sizeof(t_texture));
 	if (!tex)
 		return (NULL);
