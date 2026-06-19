@@ -1,0 +1,32 @@
+.
+├── a.txt
+├── game
+│   ├── engine
+│   │   ├── calc_wall.c
+│   │   ├── engine.c
+│   │   ├── engine_create.c
+│   │   ├── engine_move.c
+│   │   └── ray.c
+│   └── player
+│       └── player.c
+├── main.c
+├── parser
+│   ├── get_next_line.c
+│   ├── parse_line_list_utils.c
+│   ├── parser.c
+│   ├── parser_check.c
+│   ├── parser_color.c
+│   ├── parser_header_b.c
+│   ├── parser_header.c
+│   ├── parser_header_utils.c
+│   ├── parser_line_list.c
+│   ├── parser_map.c
+│   ├── parser_utils.c
+│   ├── parser_validate_map_chars.c
+│   └── parser_validate_map_flood.c
+└── screen
+    ├── screen.c
+    ├── screen_life_cycle.c
+    └── textures.c
+
+6 directories, 24 files
