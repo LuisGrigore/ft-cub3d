@@ -77,20 +77,31 @@ static int	ft_check_top_bottom(char **map, int y)
 	return (1);
 }
 
-int	ft_check_inside(char **map, int y, int x)
+static int ft_safe_char(char **map, int y, int x)
 {
-	while (x >= 0)
-	{
-		if (x != 0 && ft_strchr("0NSEW", map[y][x]))
-		{
-			if (map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-				return (0);
-			if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ')
-				return (0);
-		}
-		x--;
-	}
-	return (1);
+    if (!map[y])
+        return (' ');
+    if (x < 0 || (int)ft_strlen(map[y]) <= x)
+        return (' ');
+    return (map[y][x]);
+}
+
+int ft_check_inside(char **map, int y, int x)
+{
+    while (x >= 0)
+    {
+        if (x != 0 && ft_strchr("0NSEW", map[y][x]))
+        {
+            if (ft_safe_char(map, y, x - 1) == ' '
+                || ft_safe_char(map, y, x + 1) == ' ')
+                return (0);
+            if (ft_safe_char(map, y - 1, x) == ' '
+                || ft_safe_char(map, y + 1, x) == ' ')
+                return (0);
+        }
+        x--;
+    }
+    return (1);
 }
 
 int	ft_check_map_closed(t_parser_result *result)
