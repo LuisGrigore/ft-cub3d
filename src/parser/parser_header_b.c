@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 20:15:40 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/19 20:22:52 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:25:04 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	ft_parser_header_line(t_parser_result *result, const char *line)
 		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0)
 		return (ft_parse_texture_line(result, line));
 	if (ft_strncmp(line, "F ", 2) == 0)
-		return (ft_parse_color(&result->colorF, line));
+		return (ft_parse_color(&result->color_f, line));
 	if (ft_strncmp(line, "C ", 2) == 0)
-		return (ft_parse_color(&result->colorC, line));
+		return (ft_parse_color(&result->color_c, line));
 	return (1);
 }

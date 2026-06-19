@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:40:59 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/19 16:51:03 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:24:35 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_draw_wall(t_engine *g, t_ray *r, int x)
 		r->tex_x = 0;
 	y = 0;
 	while (y < r->draw_start)
-		ft_screen_put_pixel(g->screen, x, y++, g->colorC);
+		ft_screen_put_pixel(g->screen, x, y++, g->color_c);
 	while (y < r->draw_end)
 	{
 		tex_y = (y - r->draw_start_real) * r->tex->height / r->line_height;
@@ -95,5 +95,5 @@ void	ft_draw_wall(t_engine *g, t_ray *r, int x)
 		y++;
 	}
 	while (y < g->screen->height)
-		ft_screen_put_pixel(g->screen, x, y++, g->colorF);
+		ft_screen_put_pixel(g->screen, x, y++, g->color_f);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                             :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/23 16:44:50 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/07 21:31:33 by lgrigore         ###   ########.fr       */
+/*   Created: 2026/06/19 21:23:55 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 21:25:32 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_engine
 	t_texture		*so;
 	t_texture		*we;
 	t_texture		*ea;
-	int				colorF;
-	int				colorC;
+	int				color_f;
+	int				color_c;
 	bool			destroy_next_frame;
 }					t_engine;
 
@@ -35,8 +35,8 @@ typedef struct s_engine_config
 {
 	t_player_config	player_config;
 	char			**map;
-	int				colorF;
-	int				colorC;
+	int				color_f;
+	int				color_c;
 	char			*text_no_path;
 	char			*text_so_path;
 	char			*text_we_path;
@@ -75,5 +75,11 @@ void				ft_draw_wall(t_engine *g, t_ray *r, int x);
 t_engine			*ft_create_engine(t_engine_config config);
 int					ft_start_engine(t_engine *g);
 void				ft_destory_engine(t_engine *g);
+int					ft_start_engine(t_engine *g);
+void				ft_destory_engine(t_engine *engine);
+void				ft_move_player(t_engine *engine);
+int					ft_key_press(int keycode, void *engine_ptr);
+int					ft_exit_next_frame(void *engine_ptr);
+int					ft_update(void *engine_ptr);
 
 #endif

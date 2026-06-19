@@ -6,7 +6,7 @@
 #    By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/22 20:00:40 by juan-her          #+#    #+#              #
-#    Updated: 2026/06/19 21:13:20 by lgrigore         ###   ########.fr        #
+#    Updated: 2026/06/19 21:21:20 by lgrigore         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 
 PARSER_SRCS =  get_next_line.c parse_line_list_utils.c parser.c parser_check.c parser_color.c parser_header_b.c parser_header.c parser_header_utils.c parser_line_list.c parser_map.c parser_utils.c parser_validate_map_chars.c parser_validate_map_flood.c 
-ENGINE_SRCS = calc_wall.c ray.c engine.c
+ENGINE_SRCS = calc_wall.c engine.c engine_create.c engine_move.c ray.c
 PLAYER_SRCS =  player.c
 SCREEN_SRCS = textures.c screen.c screen_life_cycle.c
 

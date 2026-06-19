@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/19 20:06:59 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:25:32 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	main(int argc, char **argv)
 	ec.player_config.starting_x = p->starting_x;
 	ec.player_config.starting_y = p->starting_y;
 	ec.map = p->map;
-	ec.colorF = p->colorF;
-	ec.colorC = p->colorC;
+	ec.color_f = p->color_f;
+	ec.color_c = p->color_c;
 	ec.text_no_path = p->text_no_path;
 	ec.text_so_path = p->text_so_path;
 	ec.text_we_path = p->text_we_path;

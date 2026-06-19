@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 20:15:40 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/19 20:21:02 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:25:04 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static int	ft_header_complete(t_parser_result *result)
 {
 	if (result->text_ea_path && result->text_no_path && result->text_so_path
-		&& result->text_we_path && result->colorF >= 0 && result->colorC >= 0)
+		&& result->text_we_path && result->color_f >= 0 && result->color_c >= 0)
 		return (1);
 	return (0);
 }
@@ -29,8 +29,8 @@ static void	ft_init_header(t_parser_result *result)
 	result->text_so_path = NULL;
 	result->text_ea_path = NULL;
 	result->text_we_path = NULL;
-	result->colorF = -1;
-	result->colorC = -1;
+	result->color_f = -1;
+	result->color_c = -1;
 }
 
 int	ft_parser_header(t_parser_result *result, int fd)

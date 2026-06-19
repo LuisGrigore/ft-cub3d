@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:28 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/18 17:51:23 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:25:04 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_parser_result
 	float			starting_x;
 	float			starting_y;
 	float			s_angle;
-	int				colorF;
-	int				colorC;
+	int				color_f;
+	int				color_c;
 	char			*text_no_path;
 	char			*text_so_path;
 	char			*text_we_path;
