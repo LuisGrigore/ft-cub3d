@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_validate_map _flood.c                       :+:      :+:    :+:   */
+/*   parser_validate_map_flood.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: juan-her <juan-her@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 20:07:57 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/19 20:12:00 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 22:34:34 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	ft_check_map_closed(t_parser_result *result)
 	if (!ft_flood_fill(map, py, px, visited))
 	{
 		ft_free_visited(visited, map);
-		return (printf("Error: mapa abierto\n"), -1);
+		return (printf("Error: Open map\n"), -1);
 	}
 	ft_free_visited(visited, map);
 	return (1);
