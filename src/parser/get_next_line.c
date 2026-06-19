@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
 
 static char	*ft_create(char **stack, char **buffer)
 {

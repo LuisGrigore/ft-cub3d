@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   parser_map.c                                                             */
-/*                                                                            */
-/*   Conversion de la t_line lista en el mapa char** normalizado            */
-/*   (todas las filas rellenadas hasta el mismo ancho).                      */
+/*                                                        :::      ::::::::   */
+/*   parser_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 20:15:21 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 20:15:25 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
 
 static char	*ft_reg_line(char *line, int w)
 {

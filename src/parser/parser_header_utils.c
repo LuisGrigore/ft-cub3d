@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   parser_header_utils.c                                                    */
-/*                                                                            */
-/*   Utilidades de strings usadas para limpiar y leer el contenido de        */
-/*   cada linea de la cabecera (NO/SO/WE/EA/F/C).                            */
+/*                                                        :::      ::::::::   */
+/*   parser_header_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 20:15:51 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 20:15:53 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
 
 int	ft_skip_spc(const char *line)
 {
@@ -50,5 +53,5 @@ char	*ft_get_header_line_content(const char *line, int start)
 	end = ft_len_dir(line, start);
 	if (end <= start)
 		return (NULL);
-	return ft_substr(line, start, end - start);
+	return (ft_substr(line, start, end - start));
 }

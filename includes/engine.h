@@ -17,7 +17,6 @@
 # include "screen.h"
 # include <stdbool.h>
 
-
 typedef struct s_engine
 {
 	t_screen		*screen;
@@ -30,11 +29,10 @@ typedef struct s_engine
 	int				colorF;
 	int				colorC;
 	bool			destroy_next_frame;
-}				t_engine;
+}					t_engine;
 
 typedef struct s_engine_config
 {
-
 	t_player_config	player_config;
 	char			**map;
 	int				colorF;
@@ -43,40 +41,39 @@ typedef struct s_engine_config
 	char			*text_so_path;
 	char			*text_we_path;
 	char			*text_ea_path;
-}				t_engine_config;
+}					t_engine_config;
 
 typedef struct s_ray
 {
-	float		dir_x;
-	float		dir_y;
-	int			map_x;
-	int			map_y;
-	float		side_dist_x;
-	float		side_dist_y;
-	float		delta_dist_x;
-	float		delta_dist_y;
-	float		dist;
-	int			step_x;
-	int			step_y;
-	int			side;
-	int			hit;
-	float		wall_x;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	int			tex_x;
-	t_texture	*tex;
-	int			draw_start_real;
-}				t_ray;
+	float			dir_x;
+	float			dir_y;
+	int				map_x;
+	int				map_y;
+	float			side_dist_x;
+	float			side_dist_y;
+	float			delta_dist_x;
+	float			delta_dist_y;
+	float			dist;
+	int				step_x;
+	int				step_y;
+	int				side;
+	int				hit;
+	float			wall_x;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_x;
+	t_texture		*tex;
+	int				draw_start_real;
+}					t_ray;
 
-
-void		ft_init_ray(t_ray *r, t_engine *g, float angle);
-void		ft_calc_step(t_ray *r, t_engine *g);
-void		ft_perform_dda(t_ray *r, t_engine *g);
-void		ft_calc_wall(t_ray *r, t_engine *g);
-void		ft_draw_wall(t_engine *g, t_ray *r, int x);
-t_engine	*ft_create_engine(t_engine_config config);
-int			ft_start_engine(t_engine *g);
-void		ft_destory_engine(t_engine *g);
+void				ft_init_ray(t_ray *r, t_engine *g, float angle);
+void				ft_calc_step(t_ray *r, t_engine *g);
+void				ft_perform_dda(t_ray *r, t_engine *g);
+void				ft_calc_wall(t_ray *r, t_engine *g);
+void				ft_draw_wall(t_engine *g, t_ray *r, int x);
+t_engine			*ft_create_engine(t_engine_config config);
+int					ft_start_engine(t_engine *g);
+void				ft_destory_engine(t_engine *g);
 
 #endif

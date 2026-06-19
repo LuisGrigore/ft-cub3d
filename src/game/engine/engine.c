@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../externals/libft/libft.h"
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
-#include "../../../externals/libft/libft.h"
+#include <math.h>
 #include <stdlib.h>
-# include <math.h>
-
 
 static void	ft_draw_line(t_engine *g, float angle, int x)
 {
@@ -97,7 +96,6 @@ static void	ft_move_player(t_engine *engine)
 	ft_apply_speed(engine, speed);
 }
 
-
 static int	ft_update(void *engine_ptr)
 {
 	t_engine	*engine;
@@ -106,7 +104,6 @@ static int	ft_update(void *engine_ptr)
 	float		step;
 	int			i;
 
-	
 	engine = engine_ptr;
 	if (engine->destroy_next_frame)
 		return (ft_screen_stop(engine->screen));
@@ -126,27 +123,26 @@ static int	ft_update(void *engine_ptr)
 
 int	ft_start_engine(t_engine *g)
 {
-	return ft_screen_start(g->screen);
+	return (ft_screen_start(g->screen));
 }
 
-static int ft_exit_next_frame(void *engine_ptr)
+static int	ft_exit_next_frame(void *engine_ptr)
 {
 	t_engine	*engine;
-	
+
 	engine = (t_engine *)engine_ptr;
 	engine->destroy_next_frame = true;
-	return 0;
+	return (0);
 }
 
-static int ft_key_press(int keycode, void *engine_ptr)
+static int	ft_key_press(int keycode, void *engine_ptr)
 {
-	t_engine *engine = (t_engine *)engine_ptr;
+	t_engine	*engine;
 
+	engine = (t_engine *)engine_ptr;
 	if (keycode == ESC)
 		ft_exit_next_frame(engine_ptr);
-
-	return ft_player_key_press(keycode, (void*) &engine->player);
-
+	return (ft_player_key_press(keycode, (void *)&engine->player));
 }
 
 char	**ft_copy_matrix(char **matrix)
@@ -180,32 +176,29 @@ char	**ft_copy_matrix(char **matrix)
 
 t_engine	*ft_create_engine(t_engine_config config)
 {
-	t_engine *engine;
-	
+	t_engine	*engine;
+
 	engine = ft_calloc(1, sizeof(t_engine));
 	if (!engine)
 		return (NULL);
-		
 	engine->screen = ft_init_screen((t_screen_config){.width = WIDTH,
-		.height = HEIGHT, .title = "Cub3D",
-		.loop = (t_hook){.func = ft_update, .param = engine}});
-	
+			.height = HEIGHT, .title = "Cub3D",
+			.loop = (t_hook){.func = ft_update, .param = engine}});
 	ft_init_player(&engine->player, config.player_config);
 	engine->colorC = config.colorC;
 	engine->colorF = config.colorF;
 	engine->map = ft_copy_matrix(config.map);
 	if (!engine->map)
-	    return (ft_destory_engine(engine), NULL);
-
+		return (ft_destory_engine(engine), NULL);
 	engine->no = ft_screen_texture_load(engine->screen, config.text_no_path);
 	engine->so = ft_screen_texture_load(engine->screen, config.text_so_path);
 	engine->we = ft_screen_texture_load(engine->screen, config.text_we_path);
 	engine->ea = ft_screen_texture_load(engine->screen, config.text_ea_path);
 	if (!engine->no || !engine->so || !engine->we || !engine->ea)
-	    return (ft_destory_engine(engine), NULL);
-
+		return (ft_destory_engine(engine), NULL);
 	engine->destroy_next_frame = false;
-	ft_screen_x_hook(engine->screen, (t_hook){.func = ft_exit_next_frame, .param = engine});
+	ft_screen_x_hook(engine->screen, (t_hook){.func = ft_exit_next_frame,
+		.param = engine});
 	ft_screen_hook(engine->screen, (t_key_hook){2, 1L << 0, ft_key_press,
 		engine});
 	ft_screen_hook(engine->screen, (t_key_hook){3, 1L << 1,
@@ -214,13 +207,14 @@ t_engine	*ft_create_engine(t_engine_config config)
 }
 void	ft_destory_engine(t_engine *engine)
 {
+	int	i;
+
 	if (!engine)
 		return ;
 	ft_screen_texture_destroy(engine->screen, engine->no);
 	ft_screen_texture_destroy(engine->screen, engine->so);
 	ft_screen_texture_destroy(engine->screen, engine->we);
 	ft_screen_texture_destroy(engine->screen, engine->ea);
-	int	i;
 	if (engine->map)
 	{
 		i = 0;

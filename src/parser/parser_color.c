@@ -1,13 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   parser_color.c                                                           */
-/*                                                                            */
-/*   Validacion y conversion de los colores "r,g,b" de las lineas F y C.     */
+/*                                                        :::      ::::::::   */
+/*   parser_color.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 20:15:58 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 20:16:00 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
 
 int	ft_rgb_to_int(char *color)
 {

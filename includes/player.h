@@ -14,7 +14,6 @@
 # define PLAYER_H
 # include <stdbool.h>
 
-
 typedef struct s_player
 {
 	float	x;
@@ -28,7 +27,7 @@ typedef struct s_player
 
 	bool	left_rotate;
 	bool	right_rotate;
-}						t_player;
+}			t_player;
 
 typedef struct player_config
 {
@@ -36,10 +35,9 @@ typedef struct player_config
 	float	starting_y;
 	float	starting_angle;
 
-}						t_player_config;
+}			t_player_config;
 
-void	ft_init_player(t_player *player,
-							t_player_config config);
-int		ft_player_key_press(int keycode, void *player_ptr);
-int		ft_player_key_release(int keycode, void *player_ptr);
+void		ft_init_player(t_player *player, t_player_config config);
+int			ft_player_key_press(int keycode, void *player_ptr);
+int			ft_player_key_release(int keycode, void *player_ptr);
 #endif

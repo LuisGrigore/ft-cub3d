@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   parser_check.c                                                           */
-/*                                                                            */
-/*   Comprobaciones finales sobre la cabecera ya parserada: que no falte      */
-/*   ningun campo y que las texturas referenciadas existan en disco.         */
+/*                                                        :::      ::::::::   */
+/*   parser_check.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 20:14:51 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 20:14:58 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
-#include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <unistd.h>
 
 static int	ft_check_file(const char *file)
@@ -27,8 +30,8 @@ static int	ft_check_file(const char *file)
 
 int	ft_check_header(t_parser_result *result)
 {
-	if (!result->text_no_path || !result->text_so_path
-		|| !result->text_we_path || !result->text_ea_path)
+	if (!result->text_no_path || !result->text_so_path || !result->text_we_path
+		|| !result->text_ea_path)
 		return (printf("Error: faltan texturas\n"), -1);
 	if (result->colorF == -1 || result->colorC == -1)
 		return (printf("Error: faltan colores\n"), -1);

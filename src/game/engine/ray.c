@@ -12,7 +12,7 @@
 
 #include "../../../includes/config.h"
 #include "../../../includes/engine.h"
-# include <math.h>
+#include <math.h>
 
 void	ft_init_ray(t_ray *r, t_engine *g, float angle)
 {
@@ -70,30 +70,30 @@ void	ft_perform_dda(t_ray *r, t_engine *g)
 	}
 }
 
-void    ft_draw_wall(t_engine *g, t_ray *r, int x)
+void	ft_draw_wall(t_engine *g, t_ray *r, int x)
 {
-    int y;
-    int tex_y;
-    int color;
+	int	y;
+	int	tex_y;
+	int	color;
 
-    if (r->tex_x >= r->tex->width)
-        r->tex_x = r->tex->width - 1;
-    if (r->tex_x < 0)
-        r->tex_x = 0;
-    y = 0;
-    while (y < r->draw_start)
-        ft_screen_put_pixel(g->screen, x, y++, g->colorC);
-    while (y < r->draw_end)
-    {
-        tex_y = (y - r->draw_start_real) * r->tex->height / r->line_height;
-        if (tex_y >= r->tex->height)
-            tex_y = r->tex->height - 1;
-        if (tex_y < 0)
-            tex_y = 0;
-        color = ft_screen_texture_get_pixel(r->tex, r->tex_x, tex_y);
-        ft_screen_put_pixel(g->screen, x, y, color);
-        y++;
-    }
-    while (y < g->screen->height)
-        ft_screen_put_pixel(g->screen, x, y++, g->colorF);
+	if (r->tex_x >= r->tex->width)
+		r->tex_x = r->tex->width - 1;
+	if (r->tex_x < 0)
+		r->tex_x = 0;
+	y = 0;
+	while (y < r->draw_start)
+		ft_screen_put_pixel(g->screen, x, y++, g->colorC);
+	while (y < r->draw_end)
+	{
+		tex_y = (y - r->draw_start_real) * r->tex->height / r->line_height;
+		if (tex_y >= r->tex->height)
+			tex_y = r->tex->height - 1;
+		if (tex_y < 0)
+			tex_y = 0;
+		color = ft_screen_texture_get_pixel(r->tex, r->tex_x, tex_y);
+		ft_screen_put_pixel(g->screen, x, y, color);
+		y++;
+	}
+	while (y < g->screen->height)
+		ft_screen_put_pixel(g->screen, x, y++, g->colorF);
 }

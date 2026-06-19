@@ -6,19 +6,17 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:00:13 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/18 17:49:57 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 20:06:59 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/config.h"
 #include "../includes/engine.h"
 #include "../includes/parser.h"
-
 #include <stdio.h>
 
 static int	ft_check_engine(t_engine *e)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (!e)
@@ -37,23 +35,24 @@ int	main(int argc, char **argv)
 {
 	t_engine		*e;
 	t_parser_result	*p;
+	t_engine_config	ec;
 
 	if (argc != 2)
 		return (printf("Usage: %s <scene_path>\n", argv[0]), 1);
 	p = ft_parser(argv[1]);
 	if (!p)
 		return (printf("Error parsing\n"), 1);
-	e = ft_create_engine((t_engine_config){
-		.player_config = (t_player_config) {.starting_angle = p->s_angle,
-		.starting_x = p->starting_x, .starting_y = p->starting_y},
-		.map = p->map,
-		.colorF = p->colorF,
-		.colorC = p->colorC,
-		.text_no_path = p->text_no_path,
-		.text_so_path = p->text_so_path,
-		.text_we_path = p->text_we_path,
-		.text_ea_path = p->text_ea_path
-	});
+	ec.player_config.starting_angle = p->s_angle;
+	ec.player_config.starting_x = p->starting_x;
+	ec.player_config.starting_y = p->starting_y;
+	ec.map = p->map;
+	ec.colorF = p->colorF;
+	ec.colorC = p->colorC;
+	ec.text_no_path = p->text_no_path;
+	ec.text_so_path = p->text_so_path;
+	ec.text_we_path = p->text_we_path;
+	ec.text_ea_path = p->text_ea_path;
+	e = ft_create_engine(ec);
 	ft_delete_parser_result(p);
 	p = NULL;
 	if (!ft_check_engine(e))

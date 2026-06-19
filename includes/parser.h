@@ -13,8 +13,6 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-
-
 typedef struct s_line
 {
 	char			*text;
@@ -36,6 +34,6 @@ typedef struct s_parser_result
 }					t_parser_result;
 
 //**************PARSER*****************************
-t_parser_result	*ft_parser(char *path);
-void			ft_delete_parser_result(t_parser_result *result);
+t_parser_result		*ft_parser(char *path);
+void				ft_delete_parser_result(t_parser_result *result);
 #endif

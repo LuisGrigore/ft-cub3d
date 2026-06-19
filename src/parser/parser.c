@@ -1,128 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   parser.c                                                                 */
-/*                                                                            */
-/*   Punto de entrada del parser: orquesta cabecera + mapa + validaciones,   */
-/*   extrae el spawn del jugador y libera el resultado.                      */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 20:16:19 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 21:10:13 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
-#include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-int	ft_parser_player_spawn(t_parser_result *result)
+static t_parser_result	*ft_parser_init(char *path, int *fd)
 {
-	int		x;
-	int		y;
-	char	angle_simbol;
-	char	**map;
+	t_parser_result	*result;
 
-	map = result->map;
-	angle_simbol = '\0';
-	y = 0;
-	while (map[y] != NULL)
-	{
-		x = 0;
-		while (map[y][x] != '\0')
-		{
-			if (map[y][x] == 'N' || map[y][x] == 'S'
-				|| map[y][x] == 'E' || map[y][x] == 'W')
-			{
-				angle_simbol = map[y][x];
-				map[y][x] = '0';
-				result->starting_x = (x + 0.5) * 64.0;
-				result->starting_y = (y + 0.5) * 64.0;;
-				if (angle_simbol == 'N')
-					result->s_angle = -3.14159265359 / 2;
-				else if (angle_simbol == 'S')
-					result->s_angle = 3.14159265359 / 2;
-				else if (angle_simbol == 'W')
-					result->s_angle = 3.14159265359;
-				else
-					result->s_angle = 0;
-				return (1);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (-1);
+	if (ft_strlen(path) < 4 || ft_strcmp(path + ft_strlen(path) - 4, ".cub"))
+		return (printf("Error, wrong file format\n"), NULL);
+	*fd = open(path, O_RDONLY);
+	if (*fd < 0)
+		return (printf("Error, file not found\n"), NULL);
+	result = malloc(sizeof(t_parser_result));
+	if (!result)
+		return (close(*fd), NULL);
+	result->map = NULL;
+	return (result);
 }
 
-void	ft_delete_parser_result(t_parser_result *final)
+static t_parser_result	*ft_parser_fail(t_parser_result *r, int fd, char *msg)
 {
-	int	i;
-
-	if (!final)
-		return ;
-	if (final->map)
-	{
-		i = 0;
-		while (final->map[i])
-			free(final->map[i++]);
-		free(final->map);
-	}
-	free(final->text_no_path);
-	free(final->text_so_path);
-	free(final->text_we_path);
-	free(final->text_ea_path);
-	free(final);
+	printf("%s\n", msg);
+	if (fd >= 0)
+		close(fd);
+	ft_delete_parser_result(r);
+	return (NULL);
 }
 
+static int	ft_parser_read(t_parser_result *result, int fd)
+{
+	if (ft_parser_header(result, fd) == -1)
+		return (-1);
+	if (ft_check_header(result) == -1)
+		return (-1);
+	if (ft_parser_map(result, fd) == -1)
+		return (-1);
+	return (1);
+}
 
 t_parser_result	*ft_parser(char *path)
 {
 	t_parser_result	*result;
 	int				fd;
 
-	if (ft_strlen(path) < 4 || ft_strcmp(path + ft_strlen(path)-4, ".cub"))
-	{
-		printf("Error, wrong file format\n");
-		return (NULL);
-	}
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Error, file not found\n");
-		return (NULL);
-	}
-	result = malloc(sizeof(t_parser_result));
+	fd = -1;
+	result = ft_parser_init(path, &fd);
 	if (!result)
-		return (close(fd), NULL);
-	result->map = NULL;
-	if (ft_parser_header(result, fd) == -1)
-	{
-		printf("Error parsing header\n");
-		return (close(fd), ft_delete_parser_result(result), NULL);
-	}
-	if (ft_check_header(result) == -1)
-	{
-		printf("Error: invalid header\n");
-		return (close(fd), ft_delete_parser_result(result), NULL);
-	}
-	if (ft_parser_map(result, fd) == -1)
-	{
-		printf("Error parsing map\n");
-		return (close(fd), ft_delete_parser_result(result), NULL);
-	}
+		return (NULL);
+	if (ft_parser_read(result, fd) == -1)
+		return (ft_parser_fail(result, fd, "Error parsing file"));
 	close(fd);
+	fd = -1;
 	if (ft_validate_map_chars(result) == -1)
-	{
-		printf("Error: invalid char in map\n");
-		return (ft_delete_parser_result(result), NULL);
-	}
+		return (ft_parser_fail(result, -1, "Error: invalid char in map"));
 	if (ft_check_map_closed(result) == -1)
-	{
-		printf("Error: map not closed\n");
-		return (ft_delete_parser_result(result), NULL);
-	}
+		return (ft_parser_fail(result, -1, "Error: map not closed"));
 	if (ft_parser_player_spawn(result) == -1)
-	{
-		printf("Error parsing player\n");
-		return (ft_delete_parser_result(result), NULL);
-	}
+		return (ft_parser_fail(result, -1, "Error parsing player"));
 	return (result);
 }

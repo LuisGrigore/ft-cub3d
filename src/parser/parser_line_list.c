@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   parser_line_list.c                                                       */
-/*                                                                            */
-/*   Construccion y liberacion de la lista enlazada de lineas crudas         */
-/*   del mapa, leidas directamente del archivo con get_next_line.            */
+/*                                                        :::      ::::::::   */
+/*   parser_line_list.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 20:16:05 by lgrigore          #+#    #+#             */
+/*   Updated: 2026/06/19 20:23:54 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../externals/libft/libft.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
 
 void	ft_free_split(char **split)
 {
@@ -71,28 +74,20 @@ t_line	*ft_get_map_line_list(int fd)
 	char	*temp;
 	t_line	*list;
 
-	line = get_next_line(fd);
 	list = NULL;
+	line = get_next_line(fd);
 	while (line)
 	{
-		temp = ft_strtrim(line, "\n");
-		free(line);
+		temp = ft_trim_line(line);
 		if (!temp)
-		{
-			ft_delete_list(&list);
-			return (NULL);
-		}
+			return (ft_delete_list(&list), NULL);
 		if (temp[0] == '\0')
 		{
 			free(temp);
 			line = get_next_line(fd);
 			continue ;
 		}
-		if (!list)
-			list = ft_new_line(temp);
-		else
-			ft_add_line(list, ft_new_line(temp));
-		free(temp);
+		ft_process_line(&list, temp);
 		line = get_next_line(fd);
 	}
 	return (list);
