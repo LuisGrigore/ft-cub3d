@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 20:16:05 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/19 20:23:54 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 21:32:12 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,6 @@ t_line	*ft_get_map_line_list(int fd)
 		temp = ft_trim_line(line);
 		if (!temp)
 			return (ft_delete_list(&list), NULL);
-		if (temp[0] == '\0')
-		{
-			free(temp);
-			line = get_next_line(fd);
-			continue ;
-		}
 		ft_process_line(&list, temp);
 		line = get_next_line(fd);
 	}
