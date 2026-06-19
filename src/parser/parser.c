@@ -78,9 +78,17 @@ t_parser_result	*ft_parser(char *path)
 	t_parser_result	*result;
 	int				fd;
 
+	if (ft_strlen(path) < 4 || ft_strcmp(path + ft_strlen(path)-4, ".cub"))
+	{
+		printf("Error, wrong file format\n");
+		return (NULL);
+	}
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
+	{
+		printf("Error, file not found\n");
 		return (NULL);
+	}
 	result = malloc(sizeof(t_parser_result));
 	if (!result)
 		return (close(fd), NULL);
