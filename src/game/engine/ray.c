@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:40:59 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/14 18:34:23 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 16:19:35 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,22 @@ void	ft_perform_dda(t_ray *r, t_engine *g)
 	}
 }
 
-void	ft_draw_wall(t_engine *g, t_ray *r, int x)
+void    ft_draw_wall(t_engine *g, t_ray *r, int x)
 {
-	int	y;
-	int	tex_y;
-	int	color;
+    int y;
+    int tex_y;
+    int color;
 
-	y = 0;
-	while (y < r->draw_start)
-		ft_screen_put_pixel(g->screen, x, y++, g->colorC);
-	while (y < r->draw_end)
-	{
-		tex_y = (y - r->draw_start) * r->tex->height / r->line_height;
-		color = ft_screen_texture_get_pixel(r->tex, r->tex_x, tex_y);
-		ft_screen_put_pixel(g->screen, x, y, color);
-		y++;
-	}
-	while (y < g->screen->height)
-		ft_screen_put_pixel(g->screen, x, y++, g->colorF);
+    y = 0;
+    while (y < r->draw_start)
+        ft_screen_put_pixel(g->screen, x, y++, g->colorC);
+    while (y < r->draw_end)
+    {
+        tex_y = (y - r->draw_start_real) * r->tex->height / r->line_height;
+        color = ft_screen_texture_get_pixel(r->tex, r->tex_x, tex_y);
+        ft_screen_put_pixel(g->screen, x, y, color);
+        y++;
+    }
+    while (y < g->screen->height)
+        ft_screen_put_pixel(g->screen, x, y++, g->colorF);
 }

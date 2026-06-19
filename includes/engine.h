@@ -66,6 +66,7 @@ typedef struct s_ray
 	int			draw_end;
 	int			tex_x;
 	t_texture	*tex;
+	int draw_start_real;
 }				t_ray;
 
 
