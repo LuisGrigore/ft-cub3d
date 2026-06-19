@@ -2,15 +2,20 @@
 /*                                                                            */
 /*   parser_validate_map.c                                                    */
 /*                                                                            */
-/*   Validacion del mapa ya normalizado: caracteres permitidos, un solo      */
-/*   jugador y mapa completamente cerrado por paredes ('1').                 */
+/*   Validacion del mapa:                                                     */
+/*   - Caracteres permitidos                                                  */
+/*   - Un solo jugador                                                        */
+/*   - Mapa cerrado usando flood fill                                         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 #include "../../includes/parser_internal.h"
-# include "../../externals/libft/libft.h"
+#include "../../externals/libft/libft.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+/* ========================= VALIDAR CARACTERES ========================= */
 
 int	ft_validate_map_chars(t_parser_result *result)
 {
@@ -31,9 +36,10 @@ int	ft_validate_map_chars(t_parser_result *result)
 			c = map[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				n_players++;
-			if (n_players > 1 || !(c == '0' || c == '1' || c == 'N'
-				|| c == 'S' || c == 'E' || c == 'W'
-				|| c == ' ' || c == '\t'))
+			if (n_players > 1 || !(c == '0' || c == '1'
+					|| c == 'N' || c == 'S'
+					|| c == 'E' || c == 'W'
+					|| c == ' ' || c == '\t'))
 				return (-1);
 			x++;
 		}
@@ -44,88 +50,150 @@ int	ft_validate_map_chars(t_parser_result *result)
 	return (1);
 }
 
-int	ft_check_each_space(char **map, int y, int x)
+/* ========================= UTILS ========================= */
+
+static int	ft_last_valid_index(char *line)
 {
-	if (y == 0)
-	{
-		while (map[y] && map[y][x] == ' ')
-			y++;
-	}
-	else
-	{
-		while (y > 0 && map[y][x] == ' ')
-			y--;
-	}
-	if (!map[y] || map[y][x] != '1')
-		return (0);
-	return (1);
+	int	i;
+
+	i = ft_strlen(line) - 1;
+	while (i >= 0 && (line[i] == ' ' || line[i] == '\t'))
+		i--;
+	return (i);
 }
 
-static int	ft_check_top_bottom(char **map, int y)
+static int	ft_is_outside(char **map, int y, int x)
 {
+	int	last;
+
+	if (y < 0 || !map[y])
+		return (1);
+	last = ft_last_valid_index(map[y]);
+	if (x < 0 || x > last)
+		return (1);
+	return (0);
+}
+
+/* ========================= BUSCAR JUGADOR ========================= */
+
+static int	ft_find_player(char **map, int *py, int *px)
+{
+	int	y;
 	int	x;
 
-	x = 0;
-	while (map[y][x])
+	y = 0;
+	while (map[y])
 	{
-		if (map[y][x] != '1' && map[y][x] != ' ' && map[y][x] != '\t')
-			return (0);
-		if (!ft_check_each_space(map, y, x))
-			return (0);
-		x++;
+		x = 0;
+		while (map[y][x])
+		{
+			if (ft_strchr("NSEW", map[y][x]))
+			{
+				*py = y;
+				*px = x;
+				return (1);
+			}
+			x++;
+		}
+		y++;
 	}
+	return (0);
+}
+
+/* ========================= VISITED ========================= */
+
+static int	**ft_alloc_visited(char **map)
+{
+	int	**vis;
+	int	y;
+	int	len;
+
+	len = 0;
+	while (map[len])
+		len++;
+
+	vis = malloc(sizeof(int *) * len);
+	if (!vis)
+		return (NULL);
+
+	y = 0;
+	while (y < len)
+	{
+		vis[y] = ft_calloc(ft_strlen(map[y]) + 1, sizeof(int));
+		if (!vis[y])
+			return (NULL);
+		y++;
+	}
+	return (vis);
+}
+
+static void	ft_free_visited(int **vis, char **map)
+{
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		free(vis[y]);
+		y++;
+	}
+	free(vis);
+}
+
+/* ========================= FLOOD FILL ========================= */
+
+static int	ft_flood_fill(char **map, int y, int x, int **visited)
+{
+	if (ft_is_outside(map, y, x))
+		return (0);
+
+	if (map[y][x] == ' ')
+		return (0);
+
+	if (map[y][x] == '1')
+		return (1);
+
+	if (visited[y][x])
+		return (1);
+
+	visited[y][x] = 1;
+
+	if (!ft_flood_fill(map, y + 1, x, visited))
+		return (0);
+	if (!ft_flood_fill(map, y - 1, x, visited))
+		return (0);
+	if (!ft_flood_fill(map, y, x + 1, visited))
+		return (0);
+	if (!ft_flood_fill(map, y, x - 1, visited))
+		return (0);
+
 	return (1);
 }
 
-static int ft_safe_char(char **map, int y, int x)
-{
-    if (!map[y])
-        return (' ');
-    if (x < 0 || (int)ft_strlen(map[y]) <= x)
-        return (' ');
-    return (map[y][x]);
-}
-
-int ft_check_inside(char **map, int y, int x)
-{
-    while (x >= 0)
-    {
-        if (x != 0 && ft_strchr("0NSEW", map[y][x]))
-        {
-            if (ft_safe_char(map, y, x - 1) == ' '
-                || ft_safe_char(map, y, x + 1) == ' ')
-                return (0);
-            if (ft_safe_char(map, y - 1, x) == ' '
-                || ft_safe_char(map, y + 1, x) == ' ')
-                return (0);
-        }
-        x--;
-    }
-    return (1);
-}
+/* ========================= MAP CLOSED ========================= */
 
 int	ft_check_map_closed(t_parser_result *result)
 {
-	int		i;
-	int		j;
 	char	**map;
+	int		**visited;
+	int		px;
+	int		py;
 
 	map = result->map;
-	if (!ft_check_top_bottom(map, 0))
-		return (printf("Error: fila superior abierta\n"), -1);
-	i = 1;
-	while (map[i])
+
+	if (!ft_find_player(map, &py, &px))
+		return (printf("Error: no player found\n"), -1);
+
+	visited = ft_alloc_visited(map);
+	if (!visited)
+		return (-1);
+
+	if (!ft_flood_fill(map, py, px, visited))
 	{
-		j = ft_strlen(map[i]) - 1;
-		while (j > 0 && (map[i][j] == ' ' || map[i][j] == '\t'))
-			j--;
-		if (map[i][j] != '1')
-			return (printf("Error: fila %d abierta por la derecha\n", i), -1);
-		if (!ft_check_inside(map, i, j))
-			return (printf("Error: fila %d abierta por dentro\n", i), -1);
-		i++;
+		ft_free_visited(visited, map);
+		return (printf("Error: mapa abierto\n"), -1);
 	}
-	if (!ft_check_top_bottom(map, i - 1))
-		return (printf("Error: fila inferior abierta\n"), -1);
+
+	ft_free_visited(visited, map);
 	return (1);
 }

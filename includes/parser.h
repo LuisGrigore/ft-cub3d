@@ -26,7 +26,7 @@ typedef struct s_parser_result
 	char			**map;
 	float			starting_x;
 	float			starting_y;
-	float			starting_angle;
+	float			s_angle;
 	int				colorF;
 	int				colorC;
 	char			*text_no_path;

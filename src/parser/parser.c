@@ -36,13 +36,13 @@ int	ft_parser_player_spawn(t_parser_result *result)
 				result->starting_x = (x + 0.5) * 64.0;
 				result->starting_y = (y + 0.5) * 64.0;;
 				if (angle_simbol == 'N')
-					result->starting_angle = -3.14159265359 / 2;
+					result->s_angle = -3.14159265359 / 2;
 				else if (angle_simbol == 'S')
-					result->starting_angle = 3.14159265359 / 2;
+					result->s_angle = 3.14159265359 / 2;
 				else if (angle_simbol == 'W')
-					result->starting_angle = 3.14159265359;
+					result->s_angle = 3.14159265359;
 				else
-					result->starting_angle = 0;
+					result->s_angle = 0;
 				return (1);
 			}
 			x++;

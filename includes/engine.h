@@ -66,18 +66,17 @@ typedef struct s_ray
 	int			draw_end;
 	int			tex_x;
 	t_texture	*tex;
-	int draw_start_real;
+	int			draw_start_real;
 }				t_ray;
 
 
-void	ft_init_ray(t_ray *r, t_engine *g, float angle);
-void	ft_calc_step(t_ray *r, t_engine *g);
-void	ft_perform_dda(t_ray *r, t_engine *g);
-void	ft_calc_wall(t_ray *r, t_engine *g);
-void	ft_draw_wall(t_engine *g, t_ray *r, int x);
-
+void		ft_init_ray(t_ray *r, t_engine *g, float angle);
+void		ft_calc_step(t_ray *r, t_engine *g);
+void		ft_perform_dda(t_ray *r, t_engine *g);
+void		ft_calc_wall(t_ray *r, t_engine *g);
+void		ft_draw_wall(t_engine *g, t_ray *r, int x);
 t_engine	*ft_create_engine(t_engine_config config);
-int	ft_start_engine(t_engine *g);
-void	ft_destory_engine(t_engine *g);
+int			ft_start_engine(t_engine *g);
+void		ft_destory_engine(t_engine *g);
 
 #endif
