@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: juan-her <juan-her@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 20:16:19 by lgrigore          #+#    #+#             */
-/*   Updated: 2026/06/19 21:10:13 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 22:33:24 by juan-her         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static t_parser_result	*ft_parser_init(char *path, int *fd)
+static t_parser_result	*ft_parser_init(char *p, int *fd)
 {
 	t_parser_result	*result;
+	char			**s;
+	int				last;
 
-	if (ft_strlen(path) < 4 || ft_strcmp(path + ft_strlen(path) - 4, ".cub"))
+	last = 0;
+	s = ft_split(p, '/');
+	while (s[last])
+		last++;
+	if (ft_strlen(s[last - 1]) <= 4 || ft_strcmp(p + ft_strlen(p) - 4, ".cub"))
 		return (printf("Error, wrong file format\n"), NULL);
-	*fd = open(path, O_RDONLY);
+	ft_free_split(s);
+	*fd = open(p, O_RDONLY);
 	if (*fd < 0)
 		return (printf("Error, file not found\n"), NULL);
 	result = malloc(sizeof(t_parser_result));
