@@ -1,10 +1,9 @@
 NO     media/textures/NOBandera.xpm
-SO media/textures/SOBandera.xpm
+SO	media/textures/SOBandera.xpm
 F 92,74,70
 
 
-
-C    61,19,19
+C    61,19,30
 
 WE media/textures/OEBandera.xpm
 EA media/textures/EABandera.xpm

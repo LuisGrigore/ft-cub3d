@@ -18,7 +18,10 @@ int	ft_rgb_to_int(char *color)
 
 	rgb = ft_split(color, ',');
 	if (!rgb)
+	{
+		printf("Error, wrong color format");
 		return (-1);
+	}
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);

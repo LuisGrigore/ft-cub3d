@@ -6,7 +6,7 @@
 /*   By: lgrigore <lgrigore@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:40:59 by juan-her          #+#    #+#             */
-/*   Updated: 2026/06/19 16:19:35 by lgrigore         ###   ########.fr       */
+/*   Updated: 2026/06/19 16:51:03 by lgrigore         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,20 @@ void    ft_draw_wall(t_engine *g, t_ray *r, int x)
     int tex_y;
     int color;
 
+    if (r->tex_x >= r->tex->width)
+        r->tex_x = r->tex->width - 1;
+    if (r->tex_x < 0)
+        r->tex_x = 0;
     y = 0;
     while (y < r->draw_start)
         ft_screen_put_pixel(g->screen, x, y++, g->colorC);
     while (y < r->draw_end)
     {
         tex_y = (y - r->draw_start_real) * r->tex->height / r->line_height;
+        if (tex_y >= r->tex->height)
+            tex_y = r->tex->height - 1;
+        if (tex_y < 0)
+            tex_y = 0;
         color = ft_screen_texture_get_pixel(r->tex, r->tex_x, tex_y);
         ft_screen_put_pixel(g->screen, x, y, color);
         y++;
