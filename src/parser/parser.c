@@ -72,6 +72,7 @@ void	ft_delete_parser_result(t_parser_result *final)
 	free(final);
 }
 
+
 t_parser_result	*ft_parser(char *path)
 {
 	t_parser_result	*result;
